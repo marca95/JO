@@ -2,6 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from django.core.management import execute_from_command_line
 
 
 def main():
@@ -19,4 +20,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'jo.settings.local')
+    # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'jo.settings.production')
+    execute_from_command_line(sys.argv)
