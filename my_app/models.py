@@ -1,20 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
-
-class User(models.Model):
-  name = models.CharField(max_length=50)
-  first_name = models.CharField(max_length=50)
-  email = models.EmailField(max_length=100, unique=True)
-  password = models.CharField(max_length=255)
-  
-class Role(models.Model):
-  user = models.OneToOneField(User, on_delete=models.CASCADE)
-  role = models.CharField(max_length=5, choices=[('admin', 'Admin'), ('user', 'User')])
+from django.core.validators import MinValueValidator
 
 class Stadium(models.Model):
   name = models.CharField(max_length=50)
   address = models.CharField(max_length=100, unique=True)
-  available_space = models.IntegerField()
+  available_space = models.IntegerField(validators=[MinValueValidator(0)])
 
 class Cart(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart') 
@@ -43,6 +34,6 @@ class Event(models.Model):
   stadium = models.ForeignKey(Stadium, on_delete=models.CASCADE, related_name='events')
   sport = models.ForeignKey(Sport, on_delete=models.CASCADE)
   nation = models.ManyToManyField(Nation, related_name='events')
-  admin = models.ForeignKey(User)
+  admin = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
   
 
