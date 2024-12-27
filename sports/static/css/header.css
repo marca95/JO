@@ -1,0 +1,93 @@
+header {
+  height: 400px;
+  width: 100vw;
+  background-image: url('../img/jo.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.burger {
+  display: none;
+}
+
+.navbar {
+  position: absolute;
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  font-weight: 600;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+}
+
+.navbar .logo {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.nav-links ul {
+  display: flex;
+  margin-bottom: 0;
+}
+
+.nav-links ul li{
+  margin: 0 25px;
+}
+
+.nav-links ul li.active a {
+  color: red;
+}
+
+@media screen and (max-width: 792px) {
+  .navbar {
+    padding: 20px;
+    
+  }
+  .navbar.menu-show {
+    background-color: rgba(0, 0, 0, 0.45);
+    padding-bottom: 6px;
+  }
+  
+  .navbar .logo {
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+
+  .nav-links {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.45);
+    width: 100%;
+    height: 340px;
+    top: 50px;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    margin-left: -100%;
+  }
+
+  .nav-links.menu-responsive {
+    margin-left: 0;
+    top: 60px;
+    backdrop-filter: blur(2px);
+  }
+  
+  .nav-links ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .nav-links ul li{
+    text-align: center; 
+  }
+
+  .burger {
+    display: flex;
+  }
+}
