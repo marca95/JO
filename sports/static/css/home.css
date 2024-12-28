@@ -5,6 +5,10 @@
   list-style: none;
 }
 
+html {
+  max-width: 100%;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

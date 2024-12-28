@@ -1,8 +1,7 @@
 header {
   height: 400px;
   width: 100vw;
-  /* background-image: url('../img/jo.webp'); */
-  background-image: url('../img/jo1.jpg');
+  background-image: url('../img/jo1.jpg'); 
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -41,20 +40,28 @@ header {
 .nav-links ul li{
   margin: 0 25px;
   font-size: 1.1rem;
+  transition: 0.4s ease-in-out all;
+  backdrop-filter: blur(5px);
 }
 
 .nav-links ul li:hover {
   transform: scale(1.2);
-  transition: 0.5s ease-in-out all;
+  transition: 0.4s ease-in-out all;
+  backdrop-filter: blur(0px);
+}
+
+.nav-links ul li.active:hover {
+  transform: scale(1);
 }
 
 .nav-links ul li a:hover{
   color: brown;
-  transition: 0.3s ease-in-out all;
+  transition: 0.4s ease-in-out all;
 }
 
 .nav-links ul li a{
   color: black;
+  transition: 0.4s ease-in-out all;
 }
 
 .nav-links ul li.active a {
@@ -72,6 +79,10 @@ header {
 }
 
 @media screen and (max-width: 792px) {
+  header {
+    background-image: url('../img/JO_2024.jpg'); 
+  }
+
   .navbar {
     padding: 20px;
   }
@@ -107,6 +118,11 @@ header {
 
   .nav-links ul li{
     text-align: center; 
+    backdrop-filter: none;
+  }
+
+  .nav-links ul li:hover{
+    backdrop-filter: none;
   }
 
   .nav-links ul li a{
