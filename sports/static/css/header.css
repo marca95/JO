@@ -1,6 +1,6 @@
 header {
   height: 400px;
-  width: 100vw;
+  max-width: 100%;
   background-image: url('../img/jo1.jpg'); 
   background-size: cover;
   background-repeat: no-repeat;
