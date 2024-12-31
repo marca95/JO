@@ -109,3 +109,49 @@ section {
   color: white;
   text-align: center;
 }
+
+@media screen and (max-width: 1200px){
+  .condition {
+    align-items: center;
+  }
+
+  .partner h5 {
+    font-size: 1.6rem;
+  }
+
+  .partner .row {
+    height: 100%;
+  }
+
+  .partner .row .partenership {
+    height: 120px;
+  }
+}
+
+@media screen and (max-width: 1000px){
+  .partner .row .partenership {
+    height: 120px;
+    width: 120px;
+  }
+}
+
+@media screen and (max-width: 767px){
+  .container{
+    padding-top: 0;
+  }
+
+  section, .partner {
+    padding-bottom: 40px;
+    padding-top: 40px;
+    border-bottom: 1px solid white;
+  }
+
+  .first_section .address:nth-child(1){
+    text-align: center;
+  }
+
+  .first_row{
+    margin-bottom: 0px;
+  }
+}
+  
