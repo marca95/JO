@@ -153,5 +153,37 @@ section {
   .first_row{
     margin-bottom: 0px;
   }
+
+  .copyright {
+    padding-bottom: 0;
+    padding-top: 0;
+  }
 }
   
+@media screen and (max-width: 576px){
+  .address {
+    text-align: center;
+
+  }
+  .centring {
+    padding-bottom: 40px;
+  }
+
+  .condition {
+    text-align: center;
+  }
+
+  .centring .cart {
+    padding-bottom: 0px;
+  }
+
+  .img_history {
+    width: 90%;
+  }
+
+  .partner .row .partenership {
+    padding: 20px;
+  }
+
+
+ }
