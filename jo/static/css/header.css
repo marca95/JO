@@ -1,0 +1,190 @@
+*{ 
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+}
+
+html {
+  max-width: 100%;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header {
+  height: 400px;
+  max-width: 100%;
+  background-image: url('../img/jo1.jpg'); 
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.burger {
+  display: none;
+  cursor: pointer;
+}
+
+.navbar {
+  position: absolute;
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  font-weight: 600;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+.navbar .logo img{
+  width: 100px;
+  border-radius: 100px;
+}
+
+.nav-links ul {
+  display: flex;
+  margin-bottom: 0;
+}
+
+.nav-links ul li{
+  margin: 0 25px;
+  font-size: 1.1rem;
+  transition: 0.4s ease-in-out all;
+  backdrop-filter: blur(5px);
+}
+
+.nav-links ul li:hover {
+  transform: scale(1.2);
+  transition: 0.4s ease-in-out all;
+  backdrop-filter: blur(0px);
+}
+
+.nav-links ul li.active:hover {
+  transform: scale(1);
+}
+
+.nav-links ul li a:hover{
+  color: brown;
+  transition: 0.4s ease-in-out all;
+}
+
+.nav-links ul li a{
+  color: black;
+  transition: 0.4s ease-in-out all;
+}
+
+.nav-links ul li.active a {
+  color: green;
+  font-weight: bold;
+  cursor: default;
+}
+
+.nav-links ul li svg {
+  fill: black;
+}
+
+.burger svg {
+  stroke : currentColor ;
+}
+
+@media screen and (max-width: 792px) {
+  header {
+    background-image: url('../img/JO_2024.jpg'); 
+  }
+
+  .navbar {
+    padding: 20px;
+  }
+  
+  .navbar .logo img{
+    width: 70px;
+  }
+
+  .nav-links {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.45);
+    width: 100%;
+    height: 400px;
+    padding-top: 50px;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    margin-left: -100%;
+    backdrop-filter: blur(2px);
+    z-index: 1;
+  }
+
+  .nav-links.menu-responsive {
+    margin-left: 0;
+  }
+
+  .nav-links ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .nav-links ul li{
+    text-align: center; 
+    backdrop-filter: none;
+  }
+
+  .nav-links ul li:hover{
+    backdrop-filter: none;
+  }
+
+  .nav-links ul li a{
+    color: white;
+  }
+
+  .burger {
+    display: flex;
+    z-index: 3;
+  }
+
+  .burger svg{
+    margin-right: 20px;
+  }
+
+
+
+  .burger-icon {
+    display: inline;
+  }
+  
+  .close-icon {
+    display: none;
+  }
+  
+  .menu-responsive .burger-icon {
+    display: none;
+  }
+  
+  .menu-responsive .close-icon {
+    display: inline;
+  }
+
+  .burger svg {
+    fill: gold;
+    stroke: gold;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  header {
+    background-image: url('../img/flamme.jpeg');
+  }
+
+  .nav-links ul li a:hover{
+    color: gold;
+    transition: 0.3s ease all;
+  }
+}
