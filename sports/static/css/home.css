@@ -1,5 +1,5 @@
 /* --------------- Presentation ---------------  */
-section {
+.presentation, .epreuves {
   height: auto;
   padding: 80px 0;
   width: 100%;
@@ -36,9 +36,26 @@ section {
   background-color: lightcoral;
 }
 
-.epreuves p {
+.sentence_main {
   text-align: center;
-  padding: 0 20px;
+  padding: 0 20px 50px;
+  font-weight: 600;
+}
+
+.epreuves .container-fluid{
+  width: 100%;
+  margin: 0 auto 100px;
+}
+
+.epreuves .container-fluid img{
+  padding: 0;
+  height: 200px;
+  border-radius: 20%;
+}
+
+.epreuves .container-fluid p{
+  padding-left: 0;
+  text-align: left;
 }
 
 @media screen and (max-width: 1200px) {
@@ -58,7 +75,7 @@ section {
 
 @media screen and (max-width: 792px) {
 /* --------------- Presentation ---------------  */
-  .section {
+  .presentation, .epreuves {
     padding: 40px 0;
   }
 
