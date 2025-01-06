@@ -3,14 +3,17 @@
   padding: 0;
   text-decoration: none;
   list-style: none;
+  font-family: 'roboto', sans-serif;
 }
 
 html {
   max-width: 100%;
 }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.roboto-regular {
+  font-family: "Roboto", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 header {
