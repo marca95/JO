@@ -1,4 +1,9 @@
 from django.shortcuts import render
 
 def home(request):
-  return render(request, 'home.html', {'active_page' : 'home'})
+  theme = 'home.css'
+  context = {
+    'theme' : theme,
+    'active_page' : 'home',
+  }
+  return render(request, 'home.html', context)

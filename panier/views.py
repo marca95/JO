@@ -1,3 +1,9 @@
 from django.shortcuts import render
 
-# Create your views here.
+def panier(request):
+  theme = 'panier.css'
+  context = {
+    'theme' : theme,
+    'active_page' : 'panier',
+  }
+  return render(request, 'panier.html', context)

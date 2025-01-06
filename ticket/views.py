@@ -1,4 +1,9 @@
 from django.shortcuts import render
 
 def ticket_view(request):
-  return render(request, 'ticket.html', {'active_page' : 'ticket'})
+  theme = 'ticket.css'
+  context = {
+    'theme' : theme,
+    'active_page' : 'ticket',
+  }
+  return render(request, 'ticket.html', context)
