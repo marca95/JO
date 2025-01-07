@@ -1,0 +1,149 @@
+/* --------------- Presentation ---------------  */
+.presentation, .epreuves {
+  height: auto;
+  padding: 80px 0;
+  width: 100%;
+  border-top: solid 3px black;
+}
+
+.presentation h2, .epreuves h2 {
+  padding-bottom: 60px;
+  display: flex;
+  justify-content: center;
+  font-size: 2.6rem;
+}
+
+.centring {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 0;
+}
+
+.img_presentation {
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 90%;
+}
+
+.text_presentation p{
+  padding-right: 20px;
+  color: black;
+  font-size: 1.2rem;
+}
+
+/* --------------- Epreuves ---------------  */
+
+.epreuves {
+  background-color: rgb(170, 170, 170);
+}
+
+.sentence_main {
+  text-align: center;
+  padding: 0 20px 50px;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.title_third{
+  text-transform: uppercase;
+  text-decoration: underline;
+  margin: 25px auto 35px;
+  font-size: 1.6rem;
+}
+
+.epreuves .agence_card {
+  border: 2px solid black;
+  background-color: rgb(205, 127, 50);
+  padding: 10px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.epreuves .container-fluid img{
+  padding: 0;
+  height: 200px;
+  width: 60%;
+  border-radius: 10%;
+  margin-bottom: 30px;
+}
+
+.sixth_title{
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.epreuves .container-fluid p{
+  padding-left: 0;
+  text-align: left;
+  margin: auto 10px;
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 1200px) {
+/* --------------- Presentation ---------------  */
+  .presentation .text_presentation {
+    margin: 0 auto;
+    width: 90%;
+  }
+  .text_presentation p{
+    padding-bottom: 10px;
+    padding-right: 0;
+    display: flex;
+    justify-content: center;
+  }
+/* --------------- Epreuves ---------------  */
+}
+
+@media screen and (max-width: 767px) {
+/* --------------- Presentation ---------------  */
+  .presentation, .epreuves {
+    padding: 40px 0;
+  }
+
+  .presentation h2 {
+    padding-bottom: 30px;
+  }
+
+  .img_presentation {
+    width: 100%;
+  }
+/* --------------- Epreuves ---------------  */
+  .epreuves .container-fluid img{
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  /* --------------- Epreuves ---------------  */
+    .epreuves .container-fluid img{
+      width: 60%;
+    }
+  }
+
+@media screen and (max-width: 400px) {
+/* --------------- Presentation ---------------  */
+  .presentation h2 {
+    font-size: 2.2rem;
+    text-align: center;
+  }
+/* --------------- Epreuves ---------------  */
+  .sentence_main {
+    font-size: 1rem;
+  }
+
+  .title_third {
+    font-size: 1.3rem;
+  }
+
+  .epreuves .container-fluid img{
+    width: 100%;
+  }
+
+  .sixth_title, .epreuves .container-fluid p {
+    font-size: 1rem;
+  }
+}
