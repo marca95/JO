@@ -1,12 +1,12 @@
 /* --------------- Presentation ---------------  */
-.presentation, .epreuves {
+.presentation, .epreuves, .evenements {
   height: auto;
   padding: 80px 0;
   width: 100%;
   border-top: solid 3px black;
 }
 
-.presentation h2, .epreuves h2 {
+.presentation h2, .epreuves h2, .evenements h2 {
   padding-bottom: 60px;
   display: flex;
   justify-content: center;
@@ -35,7 +35,7 @@
 /* --------------- Epreuves ---------------  */
 
 .epreuves {
-  background-color: rgb(170, 170, 170);
+  background-color: #c0c0c0;
 }
 
 .sentence_main {
@@ -83,6 +83,9 @@
   font-size: 1.2rem;
 }
 
+/* --------------- Evenements ---------------  */
+
+
 @media screen and (max-width: 1200px) {
 /* --------------- Presentation ---------------  */
   .presentation .text_presentation {
@@ -95,7 +98,9 @@
     display: flex;
     justify-content: center;
   }
-/* --------------- Epreuves ---------------  */
+
+/* --------------- Evenements ---------------  */
+
 }
 
 @media screen and (max-width: 767px) {
@@ -115,6 +120,9 @@
   .epreuves .container-fluid img{
     width: 40%;
   }
+
+/* --------------- Evenements ---------------  */
+
 }
 
 @media screen and (max-width: 576px) {
@@ -122,6 +130,9 @@
     .epreuves .container-fluid img{
       width: 60%;
     }
+
+  /* --------------- Evenements ---------------  */
+
   }
 
 @media screen and (max-width: 400px) {
@@ -146,4 +157,6 @@
   .sixth_title, .epreuves .container-fluid p {
     font-size: 1rem;
   }
+/* --------------- Evenements ---------------  */
+
 }
