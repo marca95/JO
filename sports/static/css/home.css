@@ -84,6 +84,37 @@
 }
 
 /* --------------- Evenements ---------------  */
+/* .evenements .sports {
+
+} */
+
+.evenements .sports ul {
+  padding-left: 25px;
+
+}
+
+.evenements .sports ul li {
+  padding: 20px;
+  text-decoration: none;
+  border: 2px solid black;
+  background-color: #0080ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  transition: all 0.3s ease;
+}
+
+.evenements .sports ul li:hover {
+  margin: 10px;
+  font-weight: 600;
+}
+
+.evenements .sports ul li a {
+  text-decoration: none;
+  font-size: 1.4rem;
+  color: white;
+}
 
 
 @media screen and (max-width: 1200px) {

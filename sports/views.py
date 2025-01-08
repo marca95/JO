@@ -32,7 +32,7 @@ def sport_events(request, sport_id):
                     'name': nation.name,
                     'nickname': nation.nickname,
                     'image_url': nation.image.url if nation.image else None
-                } for nation in event.nation.all()],
+                } for nation in event.nation.all()], # Je fais ca car j'ai une relation many to many
                 'players': [{
                     'first_name': player.first_name,
                     'last_name': player.last_name,
