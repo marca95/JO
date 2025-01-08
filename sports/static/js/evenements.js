@@ -3,56 +3,61 @@ document.addEventListener("DOMContentLoaded", function () {
 
   sportLinks.forEach((link) => {
     link.addEventListener("click", function (event) {
-      event.preventDefault(); // Empêche le comportement par défaut du lien
+      event.preventDefault();
 
       const sportId = this.dataset.sportId;
 
       fetch(`/sport/${sportId}/events/`)
         .then((response) => response.json())
         .then((data) => {
-          const sportDetailsDiv = document.getElementById("sport-details");
-          sportDetailsDiv.innerHTML = ""; // Réinitialiser le contenu existant
+          const eventsContainer = document.getElementById("sport-details");
+          eventsContainer.innerHTML = "";
 
-          if (data.events.length > 0) {
-            data.events.forEach((event) => {
-              const eventElement = document.createElement("div");
-              eventElement.classList.add("event");
+          data.events.forEach((event) => {
+            const eventElement = document.createElement("div");
 
-              let nationsHtml = "";
+            const eventDate = event.date;
+            const eventHour = event.hour;
+
+            let nationsHtml = "";
+            if (event.nations && event.nations.length > 0) {
               event.nations.forEach((nation) => {
-                nationsHtml += `
-                  <div class="nation">
-                    <h4>${nation.name} (${nation.nickname})</h4>
-                    <img src="${nation.image_url}" alt="${nation.name}" width="100">
-                  </div>
-                `;
+                nationsHtml += `<span>${nation.name} (${nation.nickname})</span>`;
+                if (nation.image_url) {
+                  nationsHtml += `<img src="${nation.image_url}" alt="${nation.name}" width="50">`;
+                }
               });
+            } else if (event.players && event.players.length > 0) {
+              event.players.forEach((player) => {
+                nationsHtml += `<span>${player.first_name} ${player.last_name}</span>`;
+                if (player.image_url) {
+                  nationsHtml += `<img src="${player.image_url}" alt="${player.first_name} ${player.last_name}" title="${player.first_name} ${player.last_name}" width="50">`;
+                }
+              });
+            } else {
+              nationsHtml = `<span>Pas encore désigné.</span>`;
+            }
 
-              eventElement.innerHTML = `
-              <h3>${event.date} - ${event.hour}</h3>
+            eventElement.innerHTML = `
+              <h3>${eventDate} à ${eventHour}</h3>
               <p><strong>${event.stadium.name} à ${
-                event.stadium.address
-              }.</strong></p>
+              event.stadium.address
+            }</strong></p>
               <p>Opposants : ${nationsHtml}</p>
               <p>
-                Il reste ${event.stadium.available_space} places disponibles.
-                ${
-                  event.stadium.available_space > 0
-                    ? `<a href="ticket.html?event_id=${event.id}" class="btn btn-primary">Réserver maintenant</a>`
-                    : `<span>Plus de places disponibles</span>`
-                }
-              </p>
-            `;
+              ${
+                event.stadium.available_space === 0
+                  ? "Plus de tickets disponibles"
+                  : `Il reste ${event.stadium.available_space} places disponibles. 
+                <a href="/ticket/${event.id}" class="btn btn-primary">Réserver maintenant</a>`
+              }
+            </p>
+            `; // ATTENTION, IL FAUDRA ENCORE PERSONNALISER LES TICKETS AVEC LA PAGE TICKET
 
-              sportDetailsDiv.appendChild(eventElement);
-            });
-          } else {
-            sportDetailsDiv.innerHTML = "<p>Aucun événement trouvé.</p>";
-          }
+            eventsContainer.appendChild(eventElement);
+          });
         })
-        .catch((error) => {
-          console.error("Erreur lors du chargement des événements:", error);
-        });
+        .catch((error) => console.error("Error fetching event data:", error));
     });
   });
 });

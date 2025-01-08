@@ -11,27 +11,36 @@ def home(request):
         'sports': sports
     }
     return render(request, 'home.html', context)
-  
+
 def sport_events(request, sport_id):
-    sport = Sport.objects.get(id=sport_id)
-    events = sport.event_set.all() 
-    
-    event_data = []
-    for event in events:
-        formatted_date = event.date.strftime('%d/%m/%Y')
-        event_data.append({
-            'date': formatted_date,
-            'hour': event.hour,
-            'stadium': {
-                'name': event.stadium.name,  
-                'address': event.stadium.address,
-                'available_space': event.stadium.available_space
-            },
-            'nations': [{
-                'name': nation.name,
-                'nickname': nation.nickname,
-                'image_url': nation.image.url  
-            } for nation in event.nation.all()]  
-        })
-    
-    return JsonResponse({'events': event_data})
+    try:
+        sport = get_object_or_404(Sport, id=sport_id)
+        events = sport.event_set.all()
+
+        event_data = []
+        for event in events:
+            formatted_date = event.date.strftime('%d/%m/%Y')
+            event_data.append({
+                'date': formatted_date,
+                'hour': event.hour.strftime('%H:%M'),
+                'stadium': {
+                    'name': event.stadium.name,
+                    'address': event.stadium.address,
+                    'available_space': event.stadium.available_space
+                },
+                'nations': [{
+                    'name': nation.name,
+                    'nickname': nation.nickname,
+                    'image_url': nation.image.url if nation.image else None
+                } for nation in event.nation.all()],
+                'players': [{
+                    'first_name': player.first_name,
+                    'last_name': player.last_name,
+                    'image_url': player.image.url if player.image else None
+                } for player in event.players.all()]
+            })
+        return JsonResponse({'events': event_data})
+      
+    except Exception as e:
+        return JsonResponse({'error': 'Une erreur s\'est produite'}, status=500)
+
