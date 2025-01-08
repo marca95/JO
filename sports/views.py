@@ -1,9 +1,37 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse
+from .models import *
 
 def home(request):
-  theme = 'home.css'
-  context = {
-    'theme' : theme,
-    'active_page' : 'home',
-  }
-  return render(request, 'home.html', context)
+    theme = 'home.css'
+    sports = Sport.objects.all()
+    context = {
+        'theme': theme,
+        'active_page': 'home',
+        'sports': sports
+    }
+    return render(request, 'home.html', context)
+  
+def sport_events(request, sport_id):
+    sport = Sport.objects.get(id=sport_id)
+    events = sport.event_set.all() 
+    
+    event_data = []
+    for event in events:
+        formatted_date = event.date.strftime('%d/%m/%Y')
+        event_data.append({
+            'date': formatted_date,
+            'hour': event.hour,
+            'stadium': {
+                'name': event.stadium.name,  
+                'address': event.stadium.address,
+                'available_space': event.stadium.available_space
+            },
+            'nations': [{
+                'name': nation.name,
+                'nickname': nation.nickname,
+                'image_url': nation.image.url  
+            } for nation in event.nation.all()]  
+        })
+    
+    return JsonResponse({'events': event_data})

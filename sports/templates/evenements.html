@@ -1,4 +1,15 @@
 <section class="evenements">
   <h2>Evenements</h2>
-
+  <div class="row">
+    <div class="col-2 sports">
+      <ul>
+        {% for sport in sports %}
+        <li><a href="#" class="sport-link" data-sport-id="{{ sport.id }}">{{ sport.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-10" id="sport-details">
+    </div>
+  </div>
 </section>
+<script src="../static/js/evenements.js"></script>
