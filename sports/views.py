@@ -37,9 +37,11 @@ def sport_events(request, sport_id):
                     'first_name': player.first_name,
                     'last_name': player.last_name,
                     'image_url': player.image.url if player.image else None
-                } for player in event.players.all()]
+                } for player in event.players.all()], 
             })
-        return JsonResponse({'events': event_data})
+            sport_image_url = sport.image.url if sport.image else None
+            
+        return JsonResponse({'events': event_data, 'sport_image_url': sport_image_url})
       
     except Exception as e:
         return JsonResponse({'error': 'Une erreur s\'est produite'}, status=500)

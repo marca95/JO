@@ -11,6 +11,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const eventsContainer = document.getElementById("sport-details");
         eventsContainer.innerHTML = "";
 
+        const sportImageUrl = data.sport_image_url;
+        if (sportImageUrl) {
+          eventsContainer.style.backgroundImage = `url(${sportImageUrl})`;
+          eventsContainer.style.backgroundSize = "cover";
+          eventsContainer.style.backgroundPosition = "center";
+          // eventsContainer.style.filter = "blur(4px)";
+        }
+
         data.events.forEach((event) => {
           const eventElement = document.createElement("div");
 
