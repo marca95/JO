@@ -24,3 +24,12 @@ class Event(models.Model):
   sport = models.ForeignKey(Sport, on_delete=models.CASCADE)
   nation = models.ManyToManyField(Nation, related_name='events')
   admin = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+  
+class Player(models.Model):
+  first_name = models.CharField(max_length=50)
+  last_name = models.CharField(max_length=50)
+  birth_date = models.DateField()
+  image = models.ImageField(default='players/default_image.jpg')
+  events = models.ManyToManyField(Event, related_name='players')
+  nation = models.ForeignKey(Nation, on_delete=models.CASCADE, related_name='players')
+  sports = models.ManyToManyField(Sport, related_name='players')

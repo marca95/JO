@@ -1,1 +1,21 @@
-<h5>evenements</h5>
+<section class="evenements">
+  <h2>Evenements</h2>
+  <div class="row assembling">
+    <div class="col-12 col-md-3 col-xl-2 sports">
+      <ul>
+        {% for sport in sports %}
+        <li><a href="#" class="sport-link" data-sport-id="{{ sport.id }}">{{ sport.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-12 col-md-9 col-xl-10" id="sport-details">
+      <div class="background-blur"></div>
+      <div class="container-fluid">
+        <div class="content row">
+          <!-- Les événements seront ajoutés ici par JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="../static/js/evenements.js"></script>
