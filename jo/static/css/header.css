@@ -4,10 +4,11 @@
   text-decoration: none;
   list-style: none;
   font-family: 'roboto', sans-serif;
+  box-sizing: border-box;
 }
 
-html {
-  max-width: 100%;
+html, body, section {
+  overflow-x: hidden;
 }
 
 .roboto-regular {
@@ -101,7 +102,7 @@ header {
 
 @media screen and (max-width: 792px) {
   header {
-    background-image: url('../img/JO_2024.jpg'); 
+    background-image: url('../img/JO_2024.png'); 
   }
 
   .navbar {

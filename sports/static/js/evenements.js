@@ -45,13 +45,13 @@ document.addEventListener("DOMContentLoaded", function () {
               <div class="opposition d-flex justify-content-between align-items-center w-100">
                 ${nationsHtml}
               </div>
-              <p class="fs-5 fst-italic fw-bolder">${event.date} à ${
+              <p class="fs-6 fs-sm-5 fst-italic fw-bolder">${event.date} à ${
             event.hour
           }</p>
-              <p class="fs-5 fst-italic fw-bolder">${event.stadium.name} à ${
-            event.stadium.address
-          }</p>
-              <p class="fs-5 fst-italic fw-bolder">${
+              <p class="fs-6 fs-sm-5 fst-italic fw-bolder">${
+                event.stadium.name
+              } à ${event.stadium.address}</p>
+              <p class="fs-6 fs-sm-5 fst-italic fw-bolder">${
                 event.stadium.available_space === 0
                   ? "Plus de tickets disponibles"
                   : `Il reste ${event.stadium.available_space} places disponibles. 
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .map((nation) => {
           return `<div class="d-flex flex-column align-items-center text-center">
               <img src="${nation.image_url}" alt="${nation.name}" class="flag-img" style="max-height: 100px; max-width: 160px">
-              <span class="fs-5 fw-bolder mt-2">${nation.name}</span>
+              <span class="fs-6 fs-sm-5 fw-bolder mt-2">${nation.name}</span>
             </div>`;
         })
         .join(" / ");
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
           .map((player) => {
             return `<div class="d-flex flex-column align-items-center text-center">
                 <img src="${player.image_url}" alt="${player.first_name} ${player.last_name}" class="player-img" style="max-height: 100px;">
-                <span class="fs-5 fw-bolder mt-2">${player.first_name} ${player.last_name}</span>
+                <span class="fs-6 fs-sm-5 fw-bolder mt-2">${player.first_name} ${player.last_name}</span>
               </div>`;
           })
           .join(" / ");

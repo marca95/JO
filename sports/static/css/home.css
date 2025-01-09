@@ -1,3 +1,8 @@
+html {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 /* --------------- Presentation ---------------  */
 .presentation, .epreuves, .evenements {
   height: auto;
@@ -103,6 +108,7 @@
   align-items: center;
   height: 80px;
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .evenements .sports ul li:hover {
@@ -235,6 +241,27 @@
   }
 
 /* --------------- Evenements ---------------  */
+.evenements .sports {
+  padding-right: 0;
+  width: 80%;
+}
+
+.assembling{
+  display: flex;
+  justify-content: center;
+}
+
+.evenements .sports ul {
+  padding-left: 0;
+}
+
+.evenements .sports ul li {
+  padding: 0;
+}
+
+.evenements .sports ul li a{
+  font-size: 1.1rem;
+}
 
 }
 
@@ -245,7 +272,21 @@
     }
 
   /* --------------- Evenements ---------------  */
+  .layout_card{
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
 
+  .toto{
+    background: none;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .centr_button{
+    width: 70%;
+  }
   }
 
 @media screen and (max-width: 400px) {
@@ -271,5 +312,19 @@
     font-size: 1rem;
   }
 /* --------------- Evenements ---------------  */
+  #sport-details .content{
+    padding: 0;
+    padding-top: 10px;
+  }
+
+  .flag-img,
+  .player-img {
+    margin: 3px;
+    max-width: 100px !important;
+  }
+
+  .centr_button{
+    width: 90%;
+  }
 
 }

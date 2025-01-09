@@ -84,6 +84,7 @@ section {
 
 .partner {
   padding: 15px;
+  overflow-y: hidden;
 }
 
 .partner h5 {
