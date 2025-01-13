@@ -6,6 +6,14 @@
     {{ form.as_p }}
     <button type="submit">S'enregistrer</button>
   </form>
+  {% if messages %}
+  {% for message in messages %}
+  <div
+    class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}">
+    <p>{{ message }}</p>
+  </div>
+  {% endfor %}
+  {% endif %}
 
   <div class="detail">
     <p>Déjà un compte ? <a href="{% url 'login' %}" class="ps-2">Connectez-vous ici</a></p>

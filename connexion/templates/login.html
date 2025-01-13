@@ -7,6 +7,15 @@
     <button type="submit">Se connecter</button>
   </form>
 
+  {% if messages %}
+  {% for message in messages %}
+  <div
+    class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}">
+    <p>{{ message }}</p>
+  </div>
+  {% endfor %}
+  {% endif %}
+
   <div class="detail">
     <p>Pas encore de compte ? <a href="{% url 'signup' %}" class="ps-2">S'enregistrer ici</a></p>
     <p>Mot de passe oublié ? <a href="{% url 'password_reset' %}" class="ps-2">Cliquez ici</a></p>
