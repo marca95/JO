@@ -136,6 +136,7 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    padding-left: 0;
   }
 
   .nav-links ul li{
@@ -149,6 +150,7 @@ header {
 
   .nav-links ul li a{
     color: white;
+    margin-left: 0;
   }
 
   .burger {
