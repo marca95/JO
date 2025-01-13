@@ -1,11 +1,11 @@
 <header>
   <nav class="navbar">
-    <a href="#" class="logo"><img src="../static/img/icon.webp"></a>
+    <a href="#" class="logo"><img src="/static/img/icon.webp"></a>
     <div class="nav-links hidden">
       <ul>
         <li class="{% if active_page == 'home' %}active{% endif %}"><a href="{% url 'home' %}">Home</a></li>
         <li class="{% if active_page == 'ticket' %}active{% endif %}"><a href="{% url 'ticket' %}">Ticket</a></li>
-        <li class="{% if active_page == 'connexion' %}active{% endif %}"><a href="{% url 'connexion' %}">Connexion</a>
+        <li class="{% if active_page == 'connexion' %}active{% endif %}"><a href="{% url 'login' %}">Connexion</a>
         </li>
         <li class="{% if active_page == 'connexion' %}active{% endif %}"><a href="{% url 'panier' %}"><svg
               xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3"

@@ -1,0 +1,13 @@
+<section class="org">
+  <h2>S'enregistrer</h2>
+
+  <form method="post" class=" form_user">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">S'enregistrer</button>
+  </form>
+
+  <div class="detail">
+    <p>Déjà un compte ? <a href="{% url 'login' %}" class="ps-2">Connectez-vous ici</a></p>
+  </div>
+</section>

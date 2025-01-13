@@ -1,7 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %}Page de connexion{% endblock %}
+{% block title %}
+{% if action == 'login' %}
+Connexion à votre compte
+{% elif action == 'signup' %}
+Inscription à votre compte
+{% else %}
+Mot de passe oublié
+{% endif %}
+{% endblock %}
 
 {% block content %}
-<h1>Bienvenue sur la page de connexion</h1>
+{% if action == 'login' %}
+{% include 'login.html' %}
+{% elif action == 'signup' %}
+{% include 'signup.html' %}
+{% else %}
+{% include 'password.html' %}
+{% endif %}
 {% endblock %}
