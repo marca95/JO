@@ -41,25 +41,23 @@ document.addEventListener("DOMContentLoaded", function () {
           const nationsHtml = generateNationsHtml(event);
 
           eventElement.innerHTML = `
-            <div class="d-flex flex-column align-items-center toto">
-              <div class="opposition d-flex justify-content-between align-items-center w-100">
-                ${nationsHtml}
-              </div>
-              <p class="fs-5 fst-italic fw-bolder">${event.date} à ${
-            event.hour
-          }</p>
-              <p class="fs-5 fst-italic fw-bolder">${event.stadium.name} à ${
+    <div class="d-flex flex-column align-items-center toto">
+        <div class="opposition d-flex justify-content-between align-items-center w-100">
+            ${nationsHtml}
+        </div>
+        <p class="fs-5 fst-italic fw-bolder">${event.date} à ${event.hour}</p>
+        <p class="fs-5 fst-italic fw-bolder">${event.stadium.name} à ${
             event.stadium.address
           }</p>
-              <p class="fs-5 fst-italic fw-bolder">${
-                event.stadium.available_space === 0
-                  ? "Plus de tickets disponibles"
-                  : `Il reste ${event.stadium.available_space} places disponibles. 
-                    <p class="centr_button"><a href="/ticket/${event.id}" class="button">Réserver maintenant</a></p>`
-              }
-              </p>
-            </div>
-          `;
+          <p class="fs-5 fst-italic fw-bolder">
+        ${
+          event.stadium.available_space === 0
+            ? `<p class="fs-4 fw-bolder" style="color: red;">Plus de ticket disponible</p>`
+            : `Il reste ${event.stadium.available_space} places disponibles. 
+                <p class="centr_button"><a href="/ticket/${event.id}" class="button">Réserver maintenant</a></p>`
+        }</p>
+    </div>
+`;
 
           contentContainer.appendChild(eventElement);
 
