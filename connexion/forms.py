@@ -15,6 +15,13 @@ class UpdateFormSignupUser(UserCreationForm):
         widget=forms.PasswordInput,
         label="Confirmez le mot de passe",
     )
+    accept_rgpd = forms.BooleanField(
+        required=True,
+        label="J'accepte les conditions RGPD",
+        error_messages={
+            "required": "Vous devez accepter les conditions RGPD pour vous inscrire."
+        }
+    )
 
     class Meta:
         model = User

@@ -4,6 +4,9 @@
   <form method="post" class=" form_user">
     {% csrf_token %}
     {{ form.as_p }}
+    <div class="detail">
+      <p><a href="{% url 'confirm_rgpd' %}">Règlement général de la protection des données</a></p>
+    </div>
     <button type="submit">S'enregistrer</button>
   </form>
   {% if messages %}
