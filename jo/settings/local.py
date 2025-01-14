@@ -18,3 +18,11 @@ DATABASES = {
 # UTILE POUR LES FICHIERS STATIC 
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'monzooarcadia@gmail.com'
+EMAIL_HOST_PASSWORD = 'pbocfkwegsyuhplk'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False

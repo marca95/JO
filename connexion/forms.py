@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, SetPasswordForm
 from django.contrib.auth.models import User
 
 class UpdateFormSignupUser(UserCreationForm):
@@ -49,3 +49,28 @@ class UpdateFormLoginUser(AuthenticationForm):
         label="Mot de passe",
     )
     
+class UpdateFormForgotPassword(forms.Form):
+    email = forms.EmailField(
+        max_length=255,
+        required=True,
+        widget=forms.EmailInput,
+        label="Adresse e-mail",
+    )
+    
+class CustomSetPasswordForm(SetPasswordForm):
+    new_password1 = forms.CharField(
+        label=('Nouveau mot de passe'),
+        widget=forms.PasswordInput(),
+        help_text=('Votre mot de passe doit contenir au moins 8 caractères et inclure des chiffres et des lettres.')
+    )
+    new_password2 = forms.CharField(
+        label=('Confirmer le mot de passe'),
+        widget=forms.PasswordInput(),
+        help_text=('Confirmez votre nouveau mot de passe en le retapant.')
+    )
+
+    def clean_new_password1(self):
+        password1 = self.cleaned_data.get('new_password1')
+        if len(password1) < 8:
+            raise forms.ValidationError(('Le mot de passe doit comporter au moins 8 caractères.'))
+        return password1
