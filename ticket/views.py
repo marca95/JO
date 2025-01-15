@@ -39,6 +39,7 @@ def offre_view(request, sport_id):
             available_space = event.stadium.available_space - occupied_seats
 
             event_data.append({
+                'id': event.id,
                 'date': formatted_date,
                 'hour': event.hour.strftime('%H:%M'),
                 'stadium': {
@@ -72,4 +73,37 @@ def offre_view(request, sport_id):
     except Exception as e:
         return JsonResponse({'error': 'Une erreur s\'est produite'}, status=500)
 
+def detail_event(request, sport_id, event_id):
+    try:
+        sport = get_object_or_404(Sport, id=sport_id)
+        event = get_object_or_404(Event, id=event_id, sport=sport)
 
+        tickets = Ticket.objects.filter(event=event)
+        occupied_seats = sum(
+            (1 if ticket.formula == 'solo' else 2 if ticket.formula == 'duo' else 4)
+            for ticket in tickets
+        )
+        available_space = event.stadium.available_space - occupied_seats
+
+        event_data = {
+            'id': event.id,
+            'date': event.date.strftime('%d/%m/%Y'),
+            'hour': event.hour.strftime('%H:%M'),
+            'stadium': {
+                'name': event.stadium.name,
+                'address': event.stadium.address,
+                'available_space': max(available_space, 0),
+            },
+            'nations': [{
+                'name': nation.name,
+                'image_url': nation.image.url if nation.image else None,
+            } for nation in event.nation.all()],
+            'tickets': [{
+                'formula': ticket.formula,
+                'price': str(ticket.price),
+            } for ticket in tickets]
+        }
+
+        return JsonResponse({'event': event_data})
+    except Exception as e:
+        return JsonResponse({'error': 'Une erreur est survenue'}, status=500)

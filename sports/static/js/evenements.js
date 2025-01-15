@@ -2,11 +2,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const sportLinks = document.querySelectorAll(".sport-link");
   const eventsContainer = document.getElementById("sport-details");
 
-  const firstSportId = sportLinks[0].dataset.sportId;
+  const firstSportId = sportLinks[0].dataset.sportName;
   loadEvents(firstSportId);
 
-  function loadEvents(sportId) {
-    fetch(`/sport/${sportId}/events/`)
+  function loadEvents(sport_name) {
+    fetch(`/${sport_name}/events/`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Erreur réseau lors de la récupération des données.");
@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
           );
 
           const nationsHtml = generateNationsHtml(event);
-
           eventElement.innerHTML = `
     <div class="d-flex flex-column align-items-center toto">
         <div class="opposition d-flex justify-content-between align-items-center w-100">
@@ -54,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
           event.stadium.available_space === 0
             ? `<p class="fs-4 fw-bolder" style="color: red;">Plus de ticket disponible</p>`
             : `Il reste ${event.stadium.available_space} places disponibles. 
-                <p class="centr_button"><a href="/ticket/${event.id}" class="button">Réserver maintenant</a></p>`
+                <p class="centr_button"><a href="/ticket/${sport_name}/events/${event.id}" class="button">Réserver maintenant</a></p>`
         }</p>
     </div>
 `;
@@ -109,8 +108,8 @@ document.addEventListener("DOMContentLoaded", function () {
   sportLinks.forEach((link) => {
     link.addEventListener("click", function (event) {
       event.preventDefault();
-      const sportId = this.dataset.sportId;
-      loadEvents(sportId);
+      const sportName = this.dataset.sportName;
+      loadEvents(sportName);
     });
   });
 });
