@@ -14,9 +14,9 @@ def ticket_view(request):
   return render(request, 'ticket.html', context)
 
 
-def offre_view(request, sport_id):
+def offre_view(request, sport_name):
     try:
-        sport = get_object_or_404(Sport, id=sport_id)
+        sport = get_object_or_404(Sport, name=sport_name)
         events = sport.event_set.all()  
         event_data = []
 
