@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   loadEvents(firstSportName);
 
   function loadEvents(sportName) {
-    fetch(`${sportName}/events/`)
+    fetch(`${sportName}/`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Erreur réseau lors de la récupération des données.");

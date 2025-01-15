@@ -72,38 +72,23 @@ def offre_view(request, sport_name):
 
     except Exception as e:
         return JsonResponse({'error': 'Une erreur s\'est produite'}, status=500)
-
-def detail_event(request, sport_id, event_id):
+    
+def detail_view(request, sport_name):
     try:
-        sport = get_object_or_404(Sport, id=sport_id)
-        event = get_object_or_404(Event, id=event_id, sport=sport)
+        theme = 'ticket.css'
+        sport = get_object_or_404(Sport, name=sport_name)
+        events = sport.event_set.all()
 
-        tickets = Ticket.objects.filter(event=event)
-        occupied_seats = sum(
-            (1 if ticket.formula == 'solo' else 2 if ticket.formula == 'duo' else 4)
-            for ticket in tickets
-        )
-        available_space = event.stadium.available_space - occupied_seats
+        sport_image_url = sport.image.url if sport.image else None
 
-        event_data = {
-            'id': event.id,
-            'date': event.date.strftime('%d/%m/%Y'),
-            'hour': event.hour.strftime('%H:%M'),
-            'stadium': {
-                'name': event.stadium.name,
-                'address': event.stadium.address,
-                'available_space': max(available_space, 0),
-            },
-            'nations': [{
-                'name': nation.name,
-                'image_url': nation.image.url if nation.image else None,
-            } for nation in event.nation.all()],
-            'tickets': [{
-                'formula': ticket.formula,
-                'price': str(ticket.price),
-            } for ticket in tickets]
+        context = {
+            'sport': sport,
+            'events': events,
+            'theme' : theme,
+            'sport_image_url': sport_image_url
         }
 
-        return JsonResponse({'event': event_data})
+        return render(request, 'detail.html', context)  
     except Exception as e:
-        return JsonResponse({'error': 'Une erreur est survenue'}, status=500)
+        return render(request, '404.html', {'error_message': 'Une erreur s\'est produite'})
+    
