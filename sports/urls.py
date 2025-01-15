@@ -3,5 +3,5 @@ from .views import home, sport_events
 
 urlpatterns = [
   path('', home, name='home'),
-  path('sport/<int:sport_id>/events/', sport_events, name='sport_events'),
+  path('<str:sport_name>/events/', sport_events, name='sport_events'),
 ]

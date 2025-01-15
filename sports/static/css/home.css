@@ -196,7 +196,7 @@ html {
   transition: all 0.3s ease-in-out;
 }
 
-.test:hover{
+.centr_button:hover{
   background-color: #0062c3;
 }
 

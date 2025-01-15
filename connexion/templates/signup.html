@@ -1,0 +1,24 @@
+<section class="org">
+  <h2>S'enregistrer</h2>
+
+  <form method="post" class=" form_user">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="detail">
+      <p><a href="{% url 'confirm_rgpd' %}">Règlement général de la protection des données</a></p>
+    </div>
+    <button type="submit">S'enregistrer</button>
+  </form>
+  {% if messages %}
+  {% for message in messages %}
+  <div
+    class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}">
+    <p>{{ message }}</p>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  <div class="detail">
+    <p>Déjà un compte ? <a href="{% url 'login' %}" class="ps-2">Connectez-vous ici</a></p>
+  </div>
+</section>
