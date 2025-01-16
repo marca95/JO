@@ -91,6 +91,12 @@
   margin-left: 15px;
 }
 
+.safety_policy{
+  margin-left: 10px;
+  color: red;
+  font-weight: 600;
+}
+
 @media screen and (max-width: 1200px) {
   .form_user button{
     width: 80%;
