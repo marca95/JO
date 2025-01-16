@@ -100,7 +100,7 @@ html {
 .toto{
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   background: rgba(255, 255, 255, 0.8);
-  padding: 50px;
+  padding: 30px;
   border-radius: 10px;
 }
 
@@ -145,6 +145,16 @@ html {
 .add_cart:hover{
   background-color:  #0062c3;
 }
+
+.col-6.add_cart{
+  width: 40%;
+  margin: 0 auto;
+}
+
+.ticket-info{
+  margin-bottom: 40px;
+}
+
 @media screen and (max-width: 1200px) {
 
 }
@@ -190,6 +200,15 @@ html {
 
   .centr_button{
     width: 70%;
+  }
+
+  .ticket-info{
+    margin-bottom: 70px !important;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-content: center;
   }
   }
 

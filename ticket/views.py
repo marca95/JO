@@ -59,7 +59,8 @@ def offre_view(request, sport_name):
                 } for player in event.players.all()],
                 'tickets':[
                   {
-                    "price": str(ticket.price), 
+                    "price": str(ticket.price),
+                    "nbr_place": ticket.nbr_place,
                     "formula": ticket.formula,
                   }
                   for ticket in event.tickets.all()

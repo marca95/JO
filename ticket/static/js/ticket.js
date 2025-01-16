@@ -48,18 +48,21 @@ document.addEventListener("DOMContentLoaded", function () {
             event.stadium.available_space === null
           ) {
             ticketOffre = `<p class="fs-4 fw-bolder" style="color: red;">Erreur lors du téléchargement.</p>`;
+          } else if (event.tickets.length === 0) {
+            ticketOffre = `<p class="fs-4 fw-bolder" style="color: red;">Ticket pas encore disponible</p>`;
           } else {
             const ticketDetails = event.tickets
               .map((ticket) => {
-                return `<div class="ticket-info row  fw-bolder">
-                  <p class="col-3 text-capitalize mb-5">${ticket.formula}</p> <p class="col-3">${ticket.price} €</p> <p class="col-3">METTRE QUANTITE</p> <button class="col-3 add_cart">Ajouter au panier</button>
+                return `<div class="ticket-info row  fw-bolder text-center">
+                  <p class="col-4 col-sm-2 mt-2">${ticket.nbr_place}</p> <p class="col-4 col-sm-2 text-capitalize mt-2">${ticket.formula}</p> <p class="col-4 col-sm-2 mt-2">${ticket.price}</p> <button class="col-12 col-sm-6 add_cart">Ajouter au panier</button>
                 </div>`;
               })
               .join("");
             ticketOffre = `
               <p class="fs-5 fw-bolder text-center">Il reste ${event.stadium.available_space} places disponibles.</p>
               <h6 class="fs-4 text-decoration-underline mb-4">Offre :</h6>
-              <div><p class="mb-5  fw-bolder">L'offre solo contient 1 place, le duo en contient 2 et l'offre familiale en contient 4.</p>
+              <div class="ticket-info row  fw-bolder text-center"><p class="col-4 col-sm-2">Place</p> <p class="col-4 col-sm-2 text-capitalize mb-5">Formule</p> <p class="col-4 col-sm-2">€</p> <p class="d-none d-sm-block col-6">Panier</p>
+
               ${ticketDetails} 
               <div class="centr_button"><a href="" class="button">Accéder au panier</a></div></div>
             `;
