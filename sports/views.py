@@ -49,7 +49,7 @@ def sport_events(request, sport_name):
                     'first_name': player.first_name,
                     'last_name': player.last_name,
                     'image_url': player.image.url if player.image else None
-                } for player in event.players.all()],
+                } for player in event.player.all()],
             })
 
             sport_image_url = sport.image.url if sport.image else None

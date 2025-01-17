@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
               <div class="ticket-info row  fw-bolder text-center"><p class="col-4 col-sm-2">Place</p> <p class="col-4 col-sm-2 text-capitalize mb-5">Formule</p> <p class="col-4 col-sm-2">€</p> <p class="d-none d-sm-block col-6">Panier</p>
 
               ${ticketDetails} 
-              <div class="centr_button"><a href="" class="button">Accéder au panier</a></div></div>
+              <div class="centr_button"><a href="{% url 'panier' %}" class="button">Accéder au panier</a></div></div>
             `;
           }
           eventElement.innerHTML = `
@@ -144,8 +144,11 @@ document.addEventListener("click", (e) => {
     if (array.includes(ticketId)) {
       array = array.filter((id) => id !== ticketId);
       e.target.style.backgroundColor = "red";
-      setTimeout((), 3000)
-      e.target.textContent = "Ticket retiré!";
+      e.target.textContent = "Ticket retiré";
+      setTimeout(() => {
+        e.target.style.backgroundColor = "#0080ff";
+        e.target.textContent = "Ajouter au panier";
+      }, 1500);
     } else {
       array.push(ticketId);
       e.target.style.backgroundColor = "green";
@@ -158,6 +161,7 @@ document.addEventListener("click", (e) => {
   }
 });
 
+// Element a placer dans panier pour récupérer mon localStorage
 document.addEventListener("click", () => {
   const storedTickets = JSON.parse(localStorage.getItem("tickets")) || [];
   console.log("Tickets récupérés du Local Storage :", storedTickets);

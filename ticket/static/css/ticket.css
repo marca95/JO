@@ -155,6 +155,23 @@ html {
   margin-bottom: 40px;
 }
 
+.tag {
+  max-width: 50%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-top: 50px;
+  border: 1px solid black;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+.adjust_width {
+  width: 50%;
+}
+
 @media screen and (max-width: 1200px) {
 
 }
@@ -198,10 +215,6 @@ html {
     padding: 0;
   }
 
-  .centr_button{
-    width: 70%;
-  }
-
   .ticket-info{
     margin-bottom: 70px !important;
     padding: 0;
@@ -210,9 +223,52 @@ html {
     justify-content: center;
     align-content: center;
   }
+
+  .tag {
+    max-width: 90%;
+  }
+
+  .adjust_width {
+    width: 90%;
+  }
+
+  .name p {
+    position: relative;
+    font-size: 1rem; 
+  }
+
+
+  .name p {
+    color: transparent;
+  }
+
+
+  .name p::after {
+    content: attr(aria-label);
+    color: black;
+    font-weight: bold; 
+    margin-right: 50px;
+  }
+
+  .add_cart{
+    font-size: 1rem;
+  }
+
+  .hidden {
+    border-bottom: 1px solid rgb(231, 231, 231);
+    padding-bottom: 30px;
+  }
+
+  .centr_button{
+    font-size: 1rem;
+  }
   }
 
 @media screen and (max-width: 400px) {
+  .evenements h2{
+    font-size: 2.2rem;
+  }
+
   #sport-details .content{
     padding: 0;
     padding-top: 10px;
@@ -222,10 +278,6 @@ html {
   .player-img {
     margin: 3px;
     max-width: 100px !important;
-  }
-
-  .centr_button{
-    width: 90%;
   }
 
 }

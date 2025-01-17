@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
           event.stadium.available_space === 0
             ? `<p class="fs-4 fw-bolder" style="color: red;">Plus de ticket disponible</p>`
             : `Il reste ${event.stadium.available_space} places disponibles. 
-                <p class="centr_button"><a href="/ticket/${sport_name}/events" class="button">Réserver maintenant</a></p>`
+                <p class="centr_button"><a href="/ticket/${sport_name}/events/${event.id}" class="button">Réserver maintenant</a></p>`
         }</p>
     </div>
 `;

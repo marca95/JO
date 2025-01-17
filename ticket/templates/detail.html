@@ -3,7 +3,72 @@
 {% block title %}Les differentes offres de prix pour participer au Jeux Olympiques{% endblock %}
 
 {% block content %}
-<h2>{{ sport.name }}</h2>
+<section class="evenements">
+  <h2>Evenements de {{ sport.name }}</h2>
+  <div class="container-fluid">
+    <div class="row">
+      {% if nations %}
+      {% for nation in nations %}
+      <div class="col d-flex justify-content-center">
+        <img src="{{ nation.image }}" alt="Drapeau {{ nation.name }}" class="tag">
+      </div>
+      {% endfor %}
+      {% else %}
+      {% for player in players %}
+      <div class="col d-flex justify-content-center">
+        <img src="{{ player.image }}" alt="{{ player.first_name }} {{ player.last_name }}" class="tag">
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+    <div class="row">
+      {% if nations %}
+      {% for nation in nations %}
+      <div class="col d-flex justify-content-center name">
+        <p>{{ nation.name }}</p>
+      </div>
+      {% endfor %}
+      {% else %}
+      {% for player in players %}
+      <div class="col d-flex justify-content-center name">
+        <p>{{ player.first_name }} {{ player.last_name }}</p>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
 
+    <div class="container-md text-center">
+      <p class="name">Stade : {{ event.stadium.name }}</p>
+      <p class="name">Date : {{ date }} à {{ hour }}</p>
+      {% if tickets %}
+      <h5 class="text-decoration-underline text-start mb-5 name">Offre : </h5>
+      <div class="row border-bottom mb-4 name d-none d-sm-flex ">
+        <p class="col-12 col-sm-4 col-lg-2">Place</p>
+        <p class="col-12 col-sm-4 col-lg-2">Formule</p>
+        <p class="col-12 col-sm-4 col-lg-2">€</p>
+        <p class="d-none d-lg-block col-lg-6">Panier</p>
+      </div>
+      {% for ticket in tickets %}
+      <div class="row mb-4 name hidden">
+        <p class="col-12 col-sm-4 col-lg-2" aria-label="Nbr place(s) : {{ ticket.nbr_place }}">{{ ticket.nbr_place }}
+        </p>
+        <p class="col-12 col-sm-4 col-lg-2" aria-label="Formule : {{ ticket.formula }}">{{ ticket.formula }}</p>
+        <p class="col-12 col-sm-4 col-lg-2" aria-label="Prix : {{ ticket.price }}">{{ ticket.price }}</p>
+        <div class="col-md-12 col-lg-6 d-flex justify-content-center ">
+          <button class="add_cart adjust_width" value="{{ ticket.id }}">Ajouter au panier</button>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <h5 class="text-decoration-underline text-center mb-5 fs-2 text-danger">Ticket pas encore disponible</h5>
+      {% endif %}
+      <div class="mx-auto" style="width: 100%;">
+        <a href="{% url 'ticket' %}" class="centr_button button mb-5">Aller à la page ticket</a>
+        <a href="{% url 'panier' %}" class="centr_button button mb-5">Acceder au panier</a>
+      </div>
 
+    </div>
+  </div>
+</section>
+<script src="/static/js/ticket.js"></script>
 {% endblock %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
-from sports.models import *
+from sports.models import Sport, Event
 from ticket.models import Ticket
 
 def ticket_view(request):
@@ -56,7 +56,7 @@ def offre_view(request, sport_name):
                     'first_name': player.first_name,
                     'last_name': player.last_name,
                     'image_url': player.image.url if player.image else None
-                } for player in event.players.all()],
+                } for player in event.player.all()],
                 'tickets':[
                   {
                     "id" : ticket.id,
@@ -75,22 +75,31 @@ def offre_view(request, sport_name):
     except Exception as e:
         return JsonResponse({'error': 'Une erreur s\'est produite'}, status=500)
     
-def detail_view(request, sport_name):
+def detail_view(request, sport_name, event_id):
     try:
         theme = 'ticket.css'
         sport = get_object_or_404(Sport, name=sport_name)
-        events = sport.event_set.all()
-
-        sport_image_url = sport.image.url if sport.image else None
+        event = get_object_or_404(Event, id=event_id)
+        nations = event.nation.all()
+        players = event.player.all()
+        tickets = Ticket.objects.filter(event=event)
+        
+        formatted_date = event.date.strftime('%d/%m/%Y')
+        hour = event.hour.strftime('%Hh%M')
 
         context = {
-            'sport': sport,
-            'events': events,
             'theme' : theme,
-            'sport_image_url': sport_image_url
+            'sport': sport,
+            'event': event,
+            'nations' : nations,
+            'players': players,
+            'date': formatted_date, 
+            'hour': hour,
+            'tickets': tickets
         }
 
         return render(request, 'detail.html', context)  
     except Exception as e:
+        print({e})
         return render(request, '404.html', {'error_message': 'Une erreur s\'est produite'})
     
