@@ -4,8 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const burgerIcon = document.querySelector(".burger-icon");
   const closeIcon = document.querySelector(".close-icon");
 
-  const logout = document.querySelector(".logout");
-
   responsiveMenu.addEventListener("click", () => {
     navLinks.classList.toggle("menu-responsive");
 
@@ -13,7 +11,12 @@ document.addEventListener("DOMContentLoaded", () => {
     burgerIcon.style.display = isMenuOpen ? "none" : "inline";
     closeIcon.style.display = isMenuOpen ? "inline" : "none";
   });
+});
 
+// Gère la déconnection à retravailler
+const logout = document.querySelector(".logout");
+
+if (logout !== null) {
   logout.addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -23,4 +26,19 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = logout.href;
     }
   });
+}
+
+// Gère la quantité du panier
+document.addEventListener("click", () => {
+  let storedTickets = JSON.parse(localStorage.getItem("tickets")) || [];
+  let products = storedTickets.length;
+
+  let cartCount = document.querySelector(".cart-count");
+  if (products === 0) {
+    cartCount.textContent = "";
+  } else if (products > 0 || products < 10) {
+    cartCount.textContent = products;
+  } else {
+    cartCount.textContent = "+9";
+  }
 });
