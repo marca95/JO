@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const burgerIcon = document.querySelector(".burger-icon");
   const closeIcon = document.querySelector(".close-icon");
 
+  //Gère l'update de mon panier
+  updateCart();
+
   responsiveMenu.addEventListener("click", () => {
     navLinks.classList.toggle("menu-responsive");
 
@@ -29,7 +32,7 @@ if (logout !== null) {
 }
 
 // Gère la quantité du panier
-document.addEventListener("click", () => {
+function updateCart() {
   let storedTickets = JSON.parse(localStorage.getItem("tickets")) || [];
   let products = storedTickets.length;
 
@@ -41,4 +44,4 @@ document.addEventListener("click", () => {
   } else {
     cartCount.textContent = "+9";
   }
-});
+}

@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %}Vous voici dans votre panier d'achat{% endblock %}
+{% block title %}Votre panier d'achat{% endblock %}
 
 {% block content %}
-<h1>Bienvenue sur la page panier</h1>
+<section>
+  <h2>Votre panier d'achat</h2>
+  <div class="tickets">
+    <div class="show_ticket"></div>
+  </div>
+</section>
+<script src="/static/js/panier.js"></script>
 {% endblock %}

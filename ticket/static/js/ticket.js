@@ -136,14 +136,16 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-let array = [];
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("add_cart")) {
     e.preventDefault();
+
+    let storedTickets = JSON.parse(localStorage.getItem("tickets")) || [];
+
     const ticketId = e.target.value;
 
-    if (array.includes(ticketId)) {
-      array = array.filter((id) => id !== ticketId);
+    if (storedTickets.includes(ticketId)) {
+      storedTickets = storedTickets.filter((id) => id !== ticketId);
       e.target.style.backgroundColor = "red";
       e.target.textContent = "Ticket retiré";
       setTimeout(() => {
@@ -151,11 +153,13 @@ document.addEventListener("click", (e) => {
         e.target.textContent = "Ajouter au panier";
       }, 1500);
     } else {
-      array.push(ticketId);
+      storedTickets.push(ticketId);
       e.target.style.backgroundColor = "green";
       e.target.textContent = "Ticket ajouté!";
     }
 
-    localStorage.setItem("tickets", JSON.stringify(array));
+    localStorage.setItem("tickets", JSON.stringify(storedTickets));
   }
+
+  updateCart();
 });
