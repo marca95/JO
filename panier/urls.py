@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import *
+from .views import panier, panier_check
 
 urlpatterns = [
   path('', panier, name='panier'),
+  path('checkout/', panier_check, name='panier_check')
 ]
