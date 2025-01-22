@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Statut de votre commande d'achat pour la participation au Jeux Olympiques.{% endblock %}
+
+{% block content %}
+<h2 class="text-center my-3 fw-bold">Statut du Paiement</h2>
+
+{% if messages %}
+<ul>
+  {% for message in messages %}
+  <li>{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% if payment_successful %}
+<p class="text-center fs-4 text-success fw-bold">Merci pour votre achat ! Votre paiement a été validé.</p>
+<p class="text-center fs-4 text-success fw-bold">Vous recevrez vos tickets via votre adresse e-mail.</p>
+<script>
+  localStorage.clear();
+</script>
+{% else %}
+<p class="text-center fs-4 text-danger fw-bold">Votre paiement a été refusé. Veuillez réessayer.</p>
+
+{% endif %}
+{% endblock %}

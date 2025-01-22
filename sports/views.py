@@ -25,8 +25,9 @@ def sport_events(request, sport_name):
             occupied_seats = 0
 
             for ticket in tickets:
-                if ticket.qr_code:
-                    occupied_seats += ticket.nbr_place
+                linked_carts = ticket.carts.all()
+                if linked_carts.exists():
+                    occupied_seats += ticket.nbr_place * linked_carts.count()
 
             available_space = event.stadium.available_space - occupied_seats 
             

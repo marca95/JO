@@ -18,10 +18,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       this.parentElement.remove();
 
-      if (tickets.length === 0) {
-        document.querySelector(".show_ticket").innerHTML =
-          "<p>Aucun ticket dans votre panier.</p>";
-      }
+      // if (tickets.length === 0) {
+      //   document.querySelector(".show_ticket").innerHTML =
+      //     "<p>Aucun ticket dans votre panier.</p>";
+      // }
 
       updateURL(tickets);
       updateCart();
@@ -47,12 +47,9 @@ function totalprice() {
   price.forEach((element) => {
     let fetchPrice = element.innerHTML;
     totalPrice += parseFloat(fetchPrice.substr(23, 5));
-    console.log(totalPrice);
   });
 
   if (totalPrice > 0) {
     sumPrice.textContent = `Prix total : ${totalPrice}€`;
   }
-
-  console.log("total price : " + totalPrice);
 }

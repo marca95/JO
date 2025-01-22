@@ -1,7 +1,15 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from ticket.models import Ticket
 from panier.models import Cart
-from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMessage
+from reportlab.pdfgen import canvas
+from django.db import transaction
+from django.http import HttpResponseServerError 
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.units import cm 
+from io import BytesIO
+import qrcode
 import uuid
 
 def panier(request):
@@ -42,25 +50,133 @@ def generate_key():
     return str(uuid.uuid4())
 
 def panier_check(request): 
+    theme = 'panier.css'
+    context = {
+        'theme' : theme }
+        
     if request.method == "POST":
-        ticket_ids = request.POST.getlist('ticket_ids')  # Récupération des IDs des tickets
-        tickets = Ticket.objects.filter(id__in=ticket_ids)  # Filtrage des tickets
-        cart, created = Cart.objects.get_or_create(user=request.user)  # Récupérer ou créer le panier
+        ticket_ids = request.POST.getlist('ticket_ids')  
+        tickets = Ticket.objects.filter(id__in=ticket_ids)  
+        cart, created = Cart.objects.get_or_create(user=request.user)  
 
         if not cart.first_key:
             cart.first_key = generate_key()  
             cart.save()
+            
+        request.session['ticket_ids'] = ticket_ids 
+        context['tickets'] = tickets
 
-        cart.second_key = generate_key()  
+        return mock_payment(request)
+    else: 
+        return redirect('state')  
+
+def mock_payment(request):
+    theme = 'panier.css'
+
+    try:
+        cart = Cart.objects.get(user=request.user)
+        ticket_ids = request.session.get('ticket_ids', [])
+
+        if not ticket_ids:
+            return redirect('panier')
+
+        tickets = Ticket.objects.filter(id__in=ticket_ids)
+        cart.tickets.add(*tickets)
         cart.save()
 
-        ticket_qr_code = cart.first_key + cart.second_key
+        total_price = sum(ticket.price for ticket in cart.tickets.all())
+        payment_successful = True  
 
-        for ticket in tickets:
-            ticket.cart = cart
-            ticket.qr_code = ticket_qr_code  
-            ticket.save()
+        if payment_successful:
+            user = request.user
 
-        return redirect('payment')  
-    else: 
-        return redirect('panier')
+            with transaction.atomic():
+                cart.second_key = generate_key()
+                cart.save()
+
+                for ticket in tickets:
+                    ticket.save()
+                    
+            qr_data = f"{cart.first_key}{cart.second_key}"
+            qr = qrcode.make(qr_data)
+            qr_io = BytesIO()
+            qr.save(qr_io, format='PNG')
+            qr_io.seek(0)
+
+            from PIL import Image
+            from reportlab.lib.utils import ImageReader
+
+            qr_image = ImageReader(qr_io)  
+
+            email = EmailMessage(
+                subject="Vos billets pour l'événement",
+                body="Voici vos billets en pièce jointe avec le QR code à présenter à l'entrée.",
+                to=[user.email],
+            )
+
+            for ticket in cart.tickets.all():
+                event = ticket.event
+                pdf_io = BytesIO()
+                p = canvas.Canvas(pdf_io, pagesize=A4)
+
+                width, height = A4
+                margin = 2 * cm
+                text_start_y = height - margin
+
+                p.setFont("Helvetica", 12)
+                p.drawString(margin, text_start_y, "Détails du billet acheté :")
+                y_position = text_start_y - 1 * cm
+                details = (
+                    f"Participation au Jeux Olympiques 2024!\n"
+                    f"Billet #{ticket.id}\n"
+                    f"Stade : {event.stadium.name}\n"
+                    f"Date : {event.date.strftime('%d/%m/%Y')}\n"
+                    f"Heure : {event.hour.strftime('%Hh%M')}\n"
+                    f"Nom du propriétaire : {user.last_name} {user.first_name}"
+                    f"Clé 1 :{cart.first_key}"
+                    f"Clé 2 :{cart.second_key}"
+                )
+
+                for line in details.split("\n"):
+                    p.drawString(margin, y_position, line)
+                    y_position -= 0.8 * cm
+
+                qr_size = 4 * cm 
+                qr_x = margin
+                qr_y = y_position - qr_size - 1 * cm  
+                p.drawImage(qr_image, qr_x, qr_y, width=qr_size, height=qr_size)
+
+                p.save()
+                pdf_io.seek(0)
+
+                pdf_filename = f"billet_{ticket.id}.pdf"
+                email.attach(pdf_filename, pdf_io.read(), "application/pdf")
+
+            email.send()
+
+            cart.second_key = ""
+            cart.save()
+
+            context = {
+                'theme': theme,
+                'cart': cart,
+                'tickets': cart.tickets.all(),
+                'total_price': total_price,
+                'payment_successful': payment_successful,
+            }
+
+            return render(request, 'payment_state.html', context)
+        else:
+            return render(request, 'payment_state.html', {'theme': theme})
+
+    except Exception as e:
+        messages.error(request, f"Une erreur est survenue pendant le traitement de votre demande: {e}")
+        return redirect('status')
+    
+def status(request):
+    theme = 'panier.css'
+    context = {
+        'theme' : theme,
+    }
+
+    return render(request, 'payment_state.html', context)

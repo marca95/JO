@@ -3,9 +3,9 @@ from .models import Ticket
 
 @admin.register(Ticket)
 class TicketAdmin(admin.ModelAdmin):
-    list_display = ('qr_code', 'event', 'formula', 'price')
+    list_display = ('nbr_place', 'event', 'formula', 'price')
     list_filter = ('event', 'formula')
-    search_fields = ('qr_code', 'event__id')
+    search_fields = ('nbr_place', 'event__id')
 
 
 
