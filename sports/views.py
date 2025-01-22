@@ -23,14 +23,13 @@ def sport_events(request, sport_name):
             
             tickets = Ticket.objects.filter(event=event)
             occupied_seats = 0
+
             for ticket in tickets:
-                if ticket.formula == 'solo':
-                    occupied_seats += 1
-                elif ticket.formula == 'duo':
-                    occupied_seats += 2
-                elif ticket.formula == 'familiale':
-                    occupied_seats += 4
-            available_space = event.stadium.available_space - occupied_seats
+                if ticket.qr_code:
+                    occupied_seats += ticket.nbr_place
+
+            available_space = event.stadium.available_space - occupied_seats 
+            
             event_data.append({
                 'id' : event.id,
                 'date': formatted_date,

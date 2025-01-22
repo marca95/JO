@@ -7,6 +7,9 @@ from .forms import UpdateFormSignupUser, UpdateFormLoginUser, CustomSetPasswordF
 # from django.core.mail import send_mail
 # from jo.settings.local import EMAIL_HOST_USER
 
+def generate_key():
+    return str(uuid.uuid4())
+
 def connexion(request, action):
     theme = 'connexion.css'
 

@@ -3,7 +3,11 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, SetP
 from django.contrib.auth.models import User
 from django.utils.timezone import localtime
 from panier.models import Cart
+import uuid
 
+def generate_key():
+    return str(uuid.uuid4())
+    
 class UpdateFormSignupUser(UserCreationForm):
     first_name = forms.CharField(max_length=150, required=True, label="Prénom")
     last_name = forms.CharField(max_length=150, required=True, label="Nom")
@@ -48,7 +52,7 @@ class UpdateFormSignupUser(UserCreationForm):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError("Cet email est déjà utilisé.")
         return email
-      
+
     def save(self, commit=True):
         user = super().save(commit=False)
         user.is_staff = False       
@@ -58,7 +62,7 @@ class UpdateFormSignupUser(UserCreationForm):
             
             Cart.objects.create(
                 user=user,
-                first_key=localtime(user.date_joined).strftime('%Y-%m-%d %H:%M:%S')
+                first_key=generate_key()
             )
         return user
 

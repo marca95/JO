@@ -53,9 +53,21 @@ document.addEventListener("DOMContentLoaded", function () {
           } else {
             const ticketDetails = event.tickets
               .map((ticket) => {
-                return `<div class="ticket-info row  fw-bolder text-center">
-                  <p class="col-4 col-sm-2 mt-2">${ticket.nbr_place}</p> <p class="col-4 col-sm-2 text-capitalize mt-2">${ticket.formula}</p> <p class="col-4 col-sm-2 mt-2">${ticket.price}</p> <button class="col-12 col-sm-6 add_cart" value="${ticket.id}">Ajouter au panier</button>
-                </div>`;
+                const isAvailable =
+                  ticket.nbr_place <= event.stadium.available_space;
+                return `<div class="ticket-info row fw-bolder text-center">
+                <p class="col-4 col-sm-2 mt-2">${ticket.nbr_place}</p>
+                <p class="col-4 col-sm-2 text-capitalize mt-2">${
+                  ticket.formula
+                }</p>
+                <p class="col-4 col-sm-2 mt-2">${ticket.price}</p>
+                <button class="col-12 col-sm-6 add_cart ${
+                  isAvailable ? "" : "btn-disabled"
+                }" value="${ticket.id}" ${isAvailable ? "" : "disabled"}>${
+                  isAvailable ? "Ajouter au panier" : "Plus de place suffisante"
+                }
+                </button>
+              </div>`;
               })
               .join("");
             ticketOffre = `

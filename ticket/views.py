@@ -26,17 +26,11 @@ def offre_view(request, sport_name):
             tickets = Ticket.objects.filter(event=event)
             occupied_seats = 0
 
-            # Attention ce n'est pas vraiment juste, il faut valider le paiement pour diminuer le nombre de places
-
             for ticket in tickets:
-                if ticket.formula == 'solo':
-                    occupied_seats += 1
-                elif ticket.formula == 'duo':
-                    occupied_seats += 2
-                elif ticket.formula == 'familiale':
-                    occupied_seats += 4
+                if ticket.qr_code:
+                    occupied_seats += ticket.nbr_place
 
-            available_space = event.stadium.available_space - occupied_seats
+            available_space = event.stadium.available_space - occupied_seats        
 
             event_data.append({
                 'id': event.id,
@@ -83,6 +77,13 @@ def detail_view(request, sport_name, event_id):
         nations = event.nation.all()
         players = event.player.all()
         tickets = Ticket.objects.filter(event=event)
+        occupied_seats = 0
+
+        for ticket in tickets:
+            if ticket.qr_code:
+                occupied_seats += ticket.nbr_place
+
+        available_space = event.stadium.available_space - occupied_seats  
         
         formatted_date = event.date.strftime('%d/%m/%Y')
         hour = event.hour.strftime('%Hh%M')
@@ -95,7 +96,8 @@ def detail_view(request, sport_name, event_id):
             'players': players,
             'date': formatted_date, 
             'hour': hour,
-            'tickets': tickets
+            'tickets': tickets, 
+            'available_space' : available_space,
         }
 
         return render(request, 'detail.html', context)  

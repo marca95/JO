@@ -49,25 +49,35 @@
         <p class="d-none d-lg-block col-lg-6">Panier</p>
       </div>
       {% for ticket in tickets %}
-      <div class="row mb-4 name hidden">
+      {% if ticket.nbr_place <= event.stadium.available_space %} <div class="row mb-4 name hidden">
         <p class="col-12 col-sm-4 col-lg-2" aria-label="Nbr place(s) : {{ ticket.nbr_place }}">{{ ticket.nbr_place }}
         </p>
         <p class="col-12 col-sm-4 col-lg-2" aria-label="Formule : {{ ticket.formula }}">{{ ticket.formula }}</p>
         <p class="col-12 col-sm-4 col-lg-2" aria-label="Prix : {{ ticket.price }}">{{ ticket.price }}</p>
-        <div class="col-md-12 col-lg-6 d-flex justify-content-center ">
+        <div class="col-md-12 col-lg-6 d-flex justify-content-center">
           <button class="add_cart adjust_width" value="{{ ticket.id }}">Ajouter au panier</button>
         </div>
-      </div>
-      {% endfor %}
-      {% else %}
-      <h5 class="text-decoration-underline text-center mb-5 fs-2 text-danger">Ticket pas encore disponible</h5>
-      {% endif %}
-      <div class="mx-auto" style="width: 100%;">
-        <a href="{% url 'ticket' %}" class="centr_button button mb-5">Aller à la page ticket</a>
-        <a href="{% url 'panier' %}" class="centr_button button mb-5">Accéder au panier</a>
-      </div>
-
     </div>
+    {% else %}
+    <div class="row mb-4 name hidden">
+      <p class="col-12 col-sm-4 col-lg-2" aria-label="Nbr place(s) : {{ ticket.nbr_place }}">{{ ticket.nbr_place }}</p>
+      <p class="col-12 col-sm-4 col-lg-2" aria-label="Formule : {{ ticket.formula }}">{{ ticket.formula }}</p>
+      <p class="col-12 col-sm-4 col-lg-2" aria-label="Prix : {{ ticket.price }}">{{ ticket.price }}</p>
+      <div class="col-md-12 col-lg-6 d-flex justify-content-center">
+        <button class="add_cart adjust_width btn-disabled" value="{{ ticket.id }}" disabled>Complet</button>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% else %}
+    <h5 class="text-decoration-underline text-center mb-5 fs-2 text-danger">Ticket pas encore disponible</h5>
+    {% endif %}
+    <div class="mx-auto" style="width: 100%;">
+      <a href="{% url 'ticket' %}" class="centr_button button mb-5">Aller à la page ticket</a>
+      <a href="{% url 'panier' %}" class="centr_button button mb-5">Accéder au panier</a>
+    </div>
+
+  </div>
   </div>
 </section>
 <script src="/static/js/ticket.js"></script>

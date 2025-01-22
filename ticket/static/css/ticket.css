@@ -168,6 +168,16 @@ html {
   font-size: 1.4rem;
 }
 
+.btn-disabled {
+  background-color: red;
+  cursor: none;
+}
+
+.btn-disabled:hover {
+  background-color: red;
+  cursor: default;
+}
+
 .adjust_width {
   width: 50%;
 }
