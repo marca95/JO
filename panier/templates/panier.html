@@ -25,7 +25,6 @@
       <div>
         <h6 class="total_price"></h6>
       </div>
-
       {% if is_authenticated %}
       <button type="submit" class="btn_submit">Passer à la phase de paiement</button>
       {% else %}
@@ -38,6 +37,12 @@
   <p class="d-flex bg-secondary-subtle fw-bold fs-3 justify-content-center text-danger ">Vous n'avez aucun ticket dans
     votre
     panier.</p>
+  {% endif %}
+  {% if is_authenticated %}
+  <div class="d-flex justify-content-end mb-3 me-3">
+    <a href="{% url 'rgpd' %}" class="btn_success">RGPD</a>
+    <a href="{% url 'personal_data' %}" class="btn_submit">Données personnelles</a>
+  </div>
   {% endif %}
 </section>
 

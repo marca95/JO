@@ -2,6 +2,7 @@
   background-image: url('../img/drapeaux.webp');
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   padding-top: 60px;
 }
 
@@ -63,10 +64,28 @@
   font-weight: 600;
   border-radius: 40px;
   transition: all 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.btn_success {
+  padding: 20px;
+  background-color: #008100;
+  color: white;
+  font-weight: 600;
+  border-radius: 40px;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+  width: 150px;
+  text-align: center;
+  margin-right: 20px;
 }
 
 .btn_submit:hover{
   background-color: #0062c3;
+}
+
+.btn_success:hover {
+  background-color: #006900;
 }
 
 @media screen and (max-width: 400px) {

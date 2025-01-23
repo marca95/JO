@@ -5,9 +5,12 @@ from panier.models import Cart
 from django.core.mail import EmailMessage
 from reportlab.pdfgen import canvas
 from django.db import transaction
-from django.http import HttpResponseServerError 
+from django.core.exceptions import ValidationError
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm 
+from django.utils.html import escape
+from django.contrib.auth.models import User
+from .forms import PersonalDataForm
 from io import BytesIO
 import qrcode
 import uuid
@@ -180,3 +183,70 @@ def status(request):
     }
 
     return render(request, 'payment_state.html', context)
+
+def personal_data(request):
+    theme = 'personal_data.css'
+    print('Numéro 1')
+    if request.method == "POST":
+        print('Numéro 2')
+        form = PersonalDataForm(request.POST)
+        print(form)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            first_name = form.cleaned_data.get('first_name')
+            last_name = form.cleaned_data.get('last_name')
+            email = form.cleaned_data.get('email')
+
+            user = request.user
+            
+            if email and User.objects.filter(email=email).exclude(id=user.id).exists():
+                messages.error(request, "Cet email est déjà utilisé par un autre utilisateur.")
+                return redirect('personal_data')  
+
+            if username and User.objects.filter(username=username).exclude(id=user.id).exists():
+                messages.error(request, "Ce nom d'utilisateur est déjà pris.")
+                return redirect('personal_data')
+            
+            if username:
+                user.username = username
+            if first_name:
+                user.first_name = first_name
+            if last_name:
+                user.last_name = last_name
+            if email:
+                user.email = email
+
+            user.save()
+            messages.success(request, "Vos données personnelles ont été mises à jour.")
+            return redirect('personal_data')  
+
+        else:
+            messages.error(request, "Une erreur est survenue lors de la mise à jour de vos données.")
+            
+    else:
+        form = PersonalDataForm(initial={
+            'username': request.user.username,
+            'first_name': request.user.first_name,
+            'last_name': request.user.last_name,
+            'email': request.user.email,
+        })
+
+    context = {
+        'theme': theme,
+        'form': form,
+        'user': request.user,
+    }
+
+    return render(request, 'personal_data.html', context)
+
+def rgpd(request):
+    theme = 'documentation.css'
+    
+    context = {
+      'theme': theme,
+      'active_page': 'connexion'
+    }
+    
+    return render(request, 'rgpd.html', context)
+
+    

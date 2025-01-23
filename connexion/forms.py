@@ -3,10 +3,22 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, SetP
 from django.contrib.auth.models import User
 from django.utils.timezone import localtime
 from panier.models import Cart
+from django.core.exceptions import ValidationError
 import uuid
 
 def generate_key():
     return str(uuid.uuid4())
+
+def validate_input(value, field_name):
+    if not value.strip(): 
+        raise ValidationError(f"Le champ {field_name} est obligatoire.")
+    if any(char in value for char in "#$%^&*()[]{};:<>/\\|`~=_+"): 
+        raise ValidationError(f"Le champ {field_name} ne peut pas contenir de caractères spéciaux.")
+    if len(value.strip()) < 3:  
+        raise ValidationError(f"Le champ {field_name} est trop petit.")
+    if len(value.strip()) > 150:  
+        raise ValidationError(f"Le champ {field_name} est trop long.")
+    return value
     
 class UpdateFormSignupUser(UserCreationForm):
     first_name = forms.CharField(max_length=150, required=True, label="Prénom")
@@ -47,11 +59,33 @@ class UpdateFormSignupUser(UserCreationForm):
             'password2'
         ]
 
+    def clean_first_name(self):
+        first_name = self.cleaned_data.get('first_name')
+        return validate_input(first_name, "Prénom")
+    
+    def clean_last_name(self):
+        last_name = self.cleaned_data.get('last_name')
+        return validate_input(last_name, "Nom")
+    
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():
-            raise forms.ValidationError("Cet email est déjà utilisé.")
+            raise ValidationError("Cet email est déjà utilisé.")
         return email
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        return validate_input(username, "Nom d'utilisateur")
+
+    def clean_password1(self):
+        password1 = self.cleaned_data.get('password1')
+        return password1
+
+    def clean_password2(self):
+        password2 = self.cleaned_data.get('password2')
+        if password2 != self.cleaned_data.get('password1'):
+            raise ValidationError("Les mots de passe ne correspondent pas.")
+        return password2
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -106,6 +140,9 @@ class CustomSetPasswordForm(SetPasswordForm):
         if len(password1) < 8:
             raise forms.ValidationError(('Le mot de passe doit comporter au moins 8 caractères.'))
         
+        if len(password1) > 150:
+            raise forms.ValidationError(('Le mot de passe est trop long.'))
+        
         special_characters = {'?', '!', '.', '@', ','}
         if not any(char in special_characters for char in password1):
             raise forms.ValidationError(('Le mot de passe doit comporter au moins un caractère spécial (?!.@,).'))
@@ -115,4 +152,8 @@ class CustomSetPasswordForm(SetPasswordForm):
         
         if not any(char.isupper() for char in password1):
             raise forms.ValidationError(('Le mot de passe doit comporter au moins une lettre majuscule.'))
+        
+        if any(char in "#$%^&*()[]{};:<>/\\|`~=_+" for char in password1): 
+            raise ValidationError(('Le mot de passe contient un caractère non autorisé.'))
+        
         return password1
