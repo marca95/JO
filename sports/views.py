@@ -23,14 +23,14 @@ def sport_events(request, sport_name):
             
             tickets = Ticket.objects.filter(event=event)
             occupied_seats = 0
+
             for ticket in tickets:
-                if ticket.formula == 'solo':
-                    occupied_seats += 1
-                elif ticket.formula == 'duo':
-                    occupied_seats += 2
-                elif ticket.formula == 'familiale':
-                    occupied_seats += 4
-            available_space = event.stadium.available_space - occupied_seats
+                linked_carts = ticket.carts.all()
+                if linked_carts.exists():
+                    occupied_seats += ticket.nbr_place * linked_carts.count()
+
+            available_space = event.stadium.available_space - occupied_seats 
+            
             event_data.append({
                 'id' : event.id,
                 'date': formatted_date,
@@ -49,7 +49,7 @@ def sport_events(request, sport_name):
                     'first_name': player.first_name,
                     'last_name': player.last_name,
                     'image_url': player.image.url if player.image else None
-                } for player in event.players.all()],
+                } for player in event.player.all()],
             })
 
             sport_image_url = sport.image.url if sport.image else None

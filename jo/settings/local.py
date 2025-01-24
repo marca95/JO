@@ -4,6 +4,7 @@ from decouple import config
 DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -16,10 +17,13 @@ DATABASES = {
 }
 
 # UTILE POUR LES FICHIERS STATIC 
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# Si je veux envoyer des vrais mails
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'monzooarcadia@gmail.com'

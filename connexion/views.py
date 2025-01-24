@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib import messages
 from .forms import UpdateFormSignupUser, UpdateFormLoginUser, CustomSetPasswordForm
+from django.contrib.auth.views import PasswordResetDoneView, PasswordResetView, PasswordResetConfirmView, PasswordResetCompleteView
 
 # from django.http import Http404
 # from django.core.mail import send_mail
@@ -17,7 +18,7 @@ def connexion(request, action):
                 user = form.get_user()
                 login(request, user)  
                 messages.success(request, "Connexion réussie.")
-                return redirect('home')  
+                return redirect('panier')  
             else: 
                 messages.error(request, "Nom d'utilisateur ou mot de passe incorrect")
         else:
@@ -44,7 +45,6 @@ def connexion(request, action):
 
     return render(request, 'connexion.html', context)
 
-from django.contrib.auth.views import PasswordResetDoneView, PasswordResetView, PasswordResetConfirmView, PasswordResetCompleteView
 
 class CustomPasswordResetDoneView(PasswordResetDoneView) :
   template_name = 'password_reset_done.html'
@@ -87,13 +87,3 @@ class CustomPasswordResetCompleteView(PasswordResetCompleteView) :
       
       return context
     
-def rgpd(request, action):
-    theme = 'connexion.css'
-    
-    context = {
-      'theme': theme,
-      'active_page': 'connexion',
-      'action': action
-    }
-    
-    return render(request, 'rgpd.html', context)

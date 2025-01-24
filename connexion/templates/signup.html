@@ -22,3 +22,9 @@
     <p>Déjà un compte ? <a href="{% url 'login' %}" class="ps-2">Connectez-vous ici</a></p>
   </div>
 </section>
+<script src="/static/js/connexion.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    safe("id_password1")
+  })
+</script>

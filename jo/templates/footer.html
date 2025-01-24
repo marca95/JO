@@ -34,10 +34,10 @@
           <div class="col-xl-3 centring"><img src="/static/img/cart.png" alt="Panier d'achat" class='centring cart'>
           </div>
           <div class="col-xl-9 condition ">
-            <a href="#">Mentions légales</a>
-            <a href="#">Protection des données</a>
-            <a href="#">Condition générales de vente</a>
-            <a href="#">Condition générale d'utilisation</a>
+            <a href="{% url 'mentions' %}">Mentions légales</a>
+            <a href="{% url 'rgpd' %}">Protection des données</a>
+            <a href="{% url 'cgv' %}">Condition générales de vente</a>
+            <a href="{% url 'cgu' %}">Condition générale d'utilisation</a>
             <a href="#">Manuel d'utilisation</a>
           </div>
         </div>

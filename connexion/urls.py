@@ -23,6 +23,5 @@ urlpatterns = [
     ), name='password_reset_complete'),
     
     path('deconnexion/', auth_views.LogoutView.as_view(), name='logout'),
-    path('rgpd', rgpd, {'action': 'login'} ,name='confirm_rgpd')
 ]
 

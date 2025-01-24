@@ -1,0 +1,107 @@
+.ticket{
+  background-image: url('../img/drapeaux.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding-top: 60px;
+}
+
+.ticket h2{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto 50px ;
+  font-size: 2.4rem;
+} 
+
+.ticket .show_ticket{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ticket form {
+  text-align: center;
+  border: 1px solid black;
+  padding: 50px;
+  margin-bottom: 50px;
+  background-color: rgb(230, 230, 230);
+  border-radius: 40px;
+}
+
+.ticket-item {
+  border-bottom: 1px solid black;
+  padding-bottom: 40px;  
+  margin-bottom: 40px;
+  font-size: 1.2em;
+} 
+
+.delete-ticket-btn{
+  border: none;
+  background-color: red;
+  border-radius: 40px;
+  padding: 5px;
+  margin-top: 20px;
+  color: white;
+  width: 80%;
+}
+
+.delete-ticket-btn:hover{
+  background-color: rgb(211, 0, 0);
+  font-weight: 600;
+}
+
+.total_price{
+  font-size: 1.6rem;
+  margin-bottom: 40px;
+}
+
+.btn_submit{
+  padding: 20px;
+  background-color: #0080ff;
+  color: white;
+  font-weight: 600;
+  border-radius: 40px;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.btn_success {
+  padding: 20px;
+  background-color: #008100;
+  color: white;
+  font-weight: 600;
+  border-radius: 40px;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+  width: 150px;
+  text-align: center;
+  margin-right: 20px;
+}
+
+.btn_submit:hover{
+  background-color: #0062c3;
+}
+
+.btn_success:hover {
+  background-color: #006900;
+}
+
+@media screen and (max-width: 400px) {
+  .ticket form {
+    padding: 10px;
+  }
+
+  .ticket h2{
+    font-size: 2rem;
+  } 
+
+  .delete-ticket-btn{
+    width: 90%;
+  }
+
+  .btn_submit{
+    padding: 10px;
+  }
+}

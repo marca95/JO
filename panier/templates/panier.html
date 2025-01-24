@@ -1,7 +1,50 @@
 {% extends 'base.html' %}
 
-{% block title %}Vous voici dans votre panier d'achat{% endblock %}
+{% block title %}Votre panier d'achat{% endblock %}
 
 {% block content %}
-<h1>Bienvenue sur la page panier</h1>
+<section class="ticket">
+
+  {% if events %}
+  <div class="show_ticket">
+    <form method="POST" action="{% url 'panier_check' %}">
+      {% csrf_token %}
+      <h2>Votre panier d'achat</h2>
+      {% for event in events %}
+      <div class="ticket-item" data-ticket-id="{{ event.ticket_id }}">
+        <p><b>Date:</b> {{ event.date }} - <b>Heure:</b> {{ event.hour }}</p>
+        <p><b>Stade:</b> {{ event.stadium_name }}</p>
+        <p><b>Sport:</b> {{ event.sport_name }}</p>
+        <p class="price"><b>Prix du ticket:</b> {{ event.ticket_price }} €</p>
+        <p><b>Nombre de place:</b> {{ event.nbr_places }}</p>
+        <p><b>Formule:</b> {{ event.formula|capfirst }}</p>
+        <input type="hidden" name="ticket_ids" type="number" value="{{ event.ticket_id }}">
+        <button type="button" class="delete-ticket-btn">Supprimer ce ticket</button>
+      </div>
+      {% endfor %}
+      <div>
+        <h6 class="total_price"></h6>
+      </div>
+      {% if is_authenticated %}
+      <button type="submit" class="btn_submit">Passer à la phase de paiement</button>
+      {% else %}
+      <p class="error">Vous devez être connecté pour continuer vers le paiement.</p>
+      <a href="{% url 'login' %}?next={{ request.path }}">Connectez-vous ici</a>
+      {% endif %}
+    </form>
+  </div>
+  {% else %}
+  <p class="d-flex bg-secondary-subtle fw-bold fs-3 justify-content-center text-danger ">Vous n'avez aucun ticket dans
+    votre
+    panier.</p>
+  {% endif %}
+  {% if is_authenticated %}
+  <div class="d-flex justify-content-end mb-3 me-3">
+    <a href="{% url 'rgpd' %}" class="btn_success">RGPD</a>
+    <a href="{% url 'personal_data' %}" class="btn_submit">Données personnelles</a>
+  </div>
+  {% endif %}
+</section>
+
+<script src="../static/js/panier.js"></script>
 {% endblock %}

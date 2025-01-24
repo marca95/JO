@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
-from sports.models import *
+from sports.models import Sport, Event
 from ticket.models import Ticket
 
 def ticket_view(request):
@@ -26,17 +26,12 @@ def offre_view(request, sport_name):
             tickets = Ticket.objects.filter(event=event)
             occupied_seats = 0
 
-            # Attention ce n'est pas vraiment juste, il faut valider le paiement pour diminuer le nombre de places
-
             for ticket in tickets:
-                if ticket.formula == 'solo':
-                    occupied_seats += 1
-                elif ticket.formula == 'duo':
-                    occupied_seats += 2
-                elif ticket.formula == 'familiale':
-                    occupied_seats += 4
+                linked_carts = ticket.carts.all()
+                if linked_carts.exists():
+                    occupied_seats += ticket.nbr_place * linked_carts.count()
 
-            available_space = event.stadium.available_space - occupied_seats
+            available_space = event.stadium.available_space - occupied_seats       
 
             event_data.append({
                 'id': event.id,
@@ -56,10 +51,12 @@ def offre_view(request, sport_name):
                     'first_name': player.first_name,
                     'last_name': player.last_name,
                     'image_url': player.image.url if player.image else None
-                } for player in event.players.all()],
+                } for player in event.player.all()],
                 'tickets':[
                   {
-                    "price": str(ticket.price), 
+                    "id" : ticket.id,
+                    "price": str(ticket.price),
+                    "nbr_place": ticket.nbr_place,
                     "formula": ticket.formula,
                   }
                   for ticket in event.tickets.all()
@@ -73,22 +70,40 @@ def offre_view(request, sport_name):
     except Exception as e:
         return JsonResponse({'error': 'Une erreur s\'est produite'}, status=500)
     
-def detail_view(request, sport_name):
+def detail_view(request, sport_name, event_id):
     try:
         theme = 'ticket.css'
         sport = get_object_or_404(Sport, name=sport_name)
-        events = sport.event_set.all()
+        event = get_object_or_404(Event, id=event_id)
+        nations = event.nation.all()
+        players = event.player.all()
+        tickets = Ticket.objects.filter(event=event)
+        occupied_seats = 0
 
-        sport_image_url = sport.image.url if sport.image else None
+        for ticket in tickets:
+            linked_carts = ticket.carts.all()
+            if linked_carts.exists():
+                occupied_seats += ticket.nbr_place * linked_carts.count()
+
+        available_space = event.stadium.available_space - occupied_seats   
+        
+        formatted_date = event.date.strftime('%d/%m/%Y')
+        hour = event.hour.strftime('%Hh%M')
 
         context = {
-            'sport': sport,
-            'events': events,
             'theme' : theme,
-            'sport_image_url': sport_image_url
+            'sport': sport,
+            'event': event,
+            'nations' : nations,
+            'players': players,
+            'date': formatted_date, 
+            'hour': hour,
+            'tickets': tickets, 
+            'available_space' : available_space,
         }
 
         return render(request, 'detail.html', context)  
     except Exception as e:
+        print({e})
         return render(request, '404.html', {'error_message': 'Une erreur s\'est produite'})
     
