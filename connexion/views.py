@@ -87,13 +87,3 @@ class CustomPasswordResetCompleteView(PasswordResetCompleteView) :
       
       return context
     
-def rgpd(request, action):
-    theme = 'connexion.css'
-    
-    context = {
-      'theme': theme,
-      'active_page': 'connexion',
-      'action': action
-    }
-    
-    return render(request, 'rgpd.html', context)

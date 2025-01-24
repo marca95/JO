@@ -1,0 +1,193 @@
+footer {
+  height: 100%;
+  max-width: 100%;
+  background-color: rgb(43, 43, 43);
+  display: flex;
+  justify-content: center;
+  align-content: center;  
+  border-top: 2px solid gold;
+}
+
+.container {
+  padding-top: 50px;
+}
+
+.first_row{
+  margin-bottom: 60px;
+}
+
+section {
+  height: auto;
+  /* A REDEFINIR EN FONCTION DES TAILLES  */
+}
+
+.first_section {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centring {
+  display: flex;
+  justify-content: center;
+}
+
+.main_logo{
+  width: 100px;
+  border-radius: 50%;
+}
+
+.address p {
+  margin-bottom: 0.8rem;
+  color: gold;
+  font-weight: 600;
+  padding: 10px;
+  font-size: 1.2rem;
+}
+
+.img_history {
+  width: 100%;
+}
+
+.condition{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.condition a {
+  display: block;
+  position: relative;
+  text-decoration: none;
+  color: gold;
+  font-weight: 600;
+  margin: 20px 12px;
+  font-size: 1.2rem;
+}
+
+.condition a::before {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background-color: gold;
+  transition: all 0.8s ;
+}
+
+.condition a:hover::before {
+  width: 100%;
+}
+
+.cart {
+  width: 150px;
+}
+
+.partner {
+  padding: 15px;
+  overflow-y: hidden;
+}
+
+.partner h5 {
+  text-transform: capitalize;
+  text-decoration: underline;
+  font-size: 1.4rem;
+  text-align: center;
+  color: gold;
+  margin-bottom: 20px;
+}
+
+.partner .row .partenership{
+  padding: 30px;
+}
+
+.copyright {
+  height: auto;
+  width: 100%;
+  border-top: 1px solid white;
+}
+
+.copyright p {
+  color: white;
+  text-align: center;
+}
+
+@media screen and (max-width: 1200px){
+  .condition {
+    align-items: center;
+  }
+
+  .partner h5 {
+    font-size: 1.6rem;
+  }
+
+  .partner .row {
+    height: 100%;
+  }
+
+  .partner .row .partenership {
+    height: 120px;
+  }
+}
+
+@media screen and (max-width: 1000px){
+  .partner .row .partenership {
+    height: 120px;
+    width: 120px;
+  }
+}
+
+@media screen and (max-width: 767px){
+  .container{
+    padding-top: 0;
+  }
+
+  section, .partner {
+    padding-bottom: 40px;
+    padding-top: 40px;
+    border-bottom: 1px solid white;
+  }
+
+  .first_section .address:nth-child(1){
+    text-align: center;
+  }
+
+  .first_row{
+    margin-bottom: 0px;
+  }
+
+  .copyright {
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+}
+  
+@media screen and (max-width: 576px){
+  .address {
+    text-align: center;
+
+  }
+  .centring {
+    padding-bottom: 40px;
+  }
+
+  .condition {
+    text-align: center;
+  }
+
+  .centring .cart {
+    padding-bottom: 0px;
+  }
+
+  .img_history {
+    width: 90%;
+  }
+
+  .partner .row .partenership {
+    padding: 20px;
+  }
+
+
+ }

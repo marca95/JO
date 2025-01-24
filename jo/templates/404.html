@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}Page introuvable {% endblock %}
+{% block title %}Erreur 404{% endblock %}
 
 {% block content %}
-<h4>Oupssss Erreur 404</h4>
-<!-- NE PAS OUBLIER D'AJOUTER LE THEME CSS POUR MA PAGE 404, JE DOIS LE PASSER DANS MA VUE  -->
+<div class="page_not_found">
+  <h2>Oupssss Erreur 404</h2>
+  <img src="../static/img/emoticon.png" alt="Icon qui se questionne">
+  <a href="{% url 'home' %}">Page principale</a>
+</div>
+
 {% endblock %}

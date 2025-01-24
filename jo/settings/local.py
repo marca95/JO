@@ -4,6 +4,7 @@ from decouple import config
 DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -16,6 +17,7 @@ DATABASES = {
 }
 
 # UTILE POUR LES FICHIERS STATIC 
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 

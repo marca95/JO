@@ -249,4 +249,34 @@ def rgpd(request):
     
     return render(request, 'rgpd.html', context)
 
+def cgv(request):
+    theme = 'documentation.css'
+    
+    context = {
+      'theme': theme,
+      'active_page': 'connexion'
+    }
+    
+    return render(request, 'cgv.html', context)
+
+def cgu(request):
+    theme = 'documentation.css'
+    
+    context = {
+      'theme': theme,
+      'active_page': 'connexion'
+    }
+    
+    return render(request, 'cgu.html', context)
+
+def mentions(request):
+    theme = 'documentation.css'
+    
+    context = {
+      'theme': theme,
+      'active_page': 'connexion'
+    }
+    
+    return render(request, 'cgu.html', context)
+
     
