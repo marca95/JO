@@ -277,6 +277,6 @@ def mentions(request):
       'active_page': 'connexion'
     }
     
-    return render(request, 'cgu.html', context)
+    return render(request, 'mentions_legales.html', context)
 
     

@@ -5,6 +5,8 @@
 # DEBUG = False
 # ALLOWED_HOSTS = ['votre-site.com']
 
+# STATIC_ROOT = BASE_DIR / "staticfiles"
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',

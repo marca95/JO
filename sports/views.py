@@ -55,5 +55,8 @@ def sport_events(request, sport_name):
             sport_image_url = sport.image.url if sport.image else None
         return JsonResponse({'events': event_data, 'sport_image_url': sport_image_url, 'sport_name' : sport.name})
     except Exception as e:
-        return JsonResponse({'error': 'Une erreur s\'est produite'}, status=500)
+        return render(request, '404.html', {
+            'error_message': 'Une erreur s\'est produite', 
+            'theme':'page_not_found.css'
+            })
 

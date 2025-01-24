@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'panier',
     'sports',
     'ticket',
+    'jo'
 ]
 
 MIDDLEWARE = [
