@@ -4,14 +4,20 @@ from .models import *
 from ticket.models import Ticket
 
 def home(request):
-    theme = 'home.css'
-    sports = Sport.objects.all()
-    context = {
-        'theme': theme,
-        'active_page': 'home',
-        'sports': sports
-    }
-    return render(request, 'home.html', context)
+    try :
+        theme = 'home.css'
+        sports = Sport.objects.all()
+        context = {
+            'theme': theme,
+            'active_page': 'home',
+            'sports': sports
+        }
+        return render(request, 'home.html', context)
+    except Exception as e:
+        return render(request, '404.html', {
+            'error_message': 'Une erreur s\'est produite', 
+            'theme':'page_not_found.css'
+            })
 
 def sport_events(request, sport_name):
     try:
@@ -55,5 +61,8 @@ def sport_events(request, sport_name):
             sport_image_url = sport.image.url if sport.image else None
         return JsonResponse({'events': event_data, 'sport_image_url': sport_image_url, 'sport_name' : sport.name})
     except Exception as e:
-        return JsonResponse({'error': 'Une erreur s\'est produite'}, status=500)
+        return render(request, '404.html', {
+            'error_message': 'Une erreur s\'est produite', 
+            'theme':'page_not_found.css'
+            })
 

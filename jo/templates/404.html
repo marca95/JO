@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Erreur 404{% endblock %}
 
 {% block content %}
 <div class="page_not_found">
   <h2>Oupssss Erreur 404</h2>
-  <img src="../static/img/emoticon.png" alt="Icon qui se questionne">
+  <img src="{% static 'img/emoticon.png' %}" alt="Icon qui se questionne">
   <a href="{% url 'home' %}">Page principale</a>
 </div>
 

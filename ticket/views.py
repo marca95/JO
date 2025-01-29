@@ -68,7 +68,11 @@ def offre_view(request, sport_name):
         return JsonResponse({'events': event_data, 'sport_image_url': sport_image_url})
 
     except Exception as e:
-        return JsonResponse({'error': 'Une erreur s\'est produite'}, status=500)
+        print({e})
+        return render(request, '500.html', {
+            'error_message': 'Une erreur s\'est produite', 
+            'theme':'page_not_found.css'
+            })
     
 def detail_view(request, sport_name, event_id):
     try:
@@ -105,5 +109,8 @@ def detail_view(request, sport_name, event_id):
         return render(request, 'detail.html', context)  
     except Exception as e:
         print({e})
-        return render(request, '404.html', {'error_message': 'Une erreur s\'est produite'})
+        return render(request, '404.html', {
+            'error_message': 'Une erreur s\'est produite', 
+            'theme':'page_not_found.css'
+            })
     

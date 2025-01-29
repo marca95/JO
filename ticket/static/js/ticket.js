@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
           .join(" / ");
       }
     } else {
-      nationsHtml = `<span>Pas encore désigné.</span>`;
+      nationsHtml = `<span class="mx-auto fw-semibold fs-4 text-danger">Match encore désigné.</span>`;
     }
 
     return nationsHtml;

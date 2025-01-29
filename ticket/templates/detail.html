@@ -13,12 +13,14 @@
         <img src="{{ nation.image }}" alt="Drapeau {{ nation.name }}" class="tag">
       </div>
       {% endfor %}
-      {% else %}
+      {% elif players %}
       {% for player in players %}
       <div class="col d-flex justify-content-center">
         <img src="{{ player.image }}" alt="{{ player.first_name }} {{ player.last_name }}" class="tag">
       </div>
       {% endfor %}
+      {% else %}
+      <span class="text-center fw-semibold fs-4 text-danger mb-4">Match encore désigné.</span>
       {% endif %}
     </div>
     <div class="row">
