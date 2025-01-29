@@ -1,11 +1,15 @@
 from django.contrib import admin
-from .models import Ticket
+from django.db.models import Count
+from ticket.models import Ticket
+from panier.models import Cart
 
-@admin.register(Ticket)
 class TicketAdmin(admin.ModelAdmin):
-    list_display = ('nbr_place', 'event', 'formula', 'price')
-    list_filter = ('event', 'formula')
-    search_fields = ('nbr_place', 'event__id')
+    list_display = ('nbr_place', 'event', 'formula', 'price', 'total_sales')
+    list_filter = ('event', 'formula', 'nbr_place', 'price')
+    search_fields = ('nbr_place', 'event__id', 'formula')
 
+    def total_sales(self, id_ticket):
+        total = Cart.objects.filter(tickets=id_ticket).aggregate(total=Count('tickets'))['total'] or 0  
+        return total
 
-
+admin.site.register(Ticket, TicketAdmin)
