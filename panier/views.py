@@ -11,6 +11,7 @@ from reportlab.lib.units import cm
 from django.utils.html import escape
 from django.contrib.auth.models import User
 from .forms import PersonalDataForm
+from reportlab.lib.utils import ImageReader
 from io import BytesIO
 import qrcode
 import uuid
@@ -106,9 +107,6 @@ def mock_payment(request):
             qr.save(qr_io, format='PNG')
             qr_io.seek(0)
 
-            from PIL import Image
-            from reportlab.lib.utils import ImageReader
-
             qr_image = ImageReader(qr_io)  
 
             email = EmailMessage(
@@ -186,11 +184,8 @@ def status(request):
 
 def personal_data(request):
     theme = 'personal_data.css'
-    print('Numéro 1')
     if request.method == "POST":
-        print('Numéro 2')
         form = PersonalDataForm(request.POST)
-        print(form)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             first_name = form.cleaned_data.get('first_name')

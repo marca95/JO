@@ -2,7 +2,6 @@ from django.test import TestCase
 from sports.models import *
 from django.db import IntegrityError
 from django.core.exceptions import ValidationError
-import datetime
 
 class SportModelsTest(TestCase):
   def setUp(self):
