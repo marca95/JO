@@ -5,7 +5,7 @@
     {% csrf_token %}
     {{ form.as_p }}
     <div class="detail">
-      <p><a href="{% url 'confirm_rgpd' %}">Règlement général de la protection des données</a></p>
+      <p><a href="{% url 'rgpd' %}">Règlement général de la protection des données</a></p>
     </div>
     <button type="submit">S'enregistrer</button>
   </form>
