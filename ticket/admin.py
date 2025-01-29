@@ -8,8 +8,8 @@ class TicketAdmin(admin.ModelAdmin):
     list_filter = ('event', 'formula', 'nbr_place', 'price')
     search_fields = ('nbr_place', 'event__id', 'formula')
 
-    def total_sales(self, obj):
-        total = Cart.objects.filter(tickets=obj).aggregate(total=Count('tickets'))['total'] or 0  
+    def total_sales(self, id_ticket):
+        total = Cart.objects.filter(tickets=id_ticket).aggregate(total=Count('tickets'))['total'] or 0  
         return total
 
 admin.site.register(Ticket, TicketAdmin)
