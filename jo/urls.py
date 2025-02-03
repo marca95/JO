@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
 from django.shortcuts import render
-from two_factor.urls import urlpatterns as tf_urls
+# from two_factor.urls import urlpatterns as tf_urls
 
 urlpatterns = [  
     path("admin/", admin.site.urls),
