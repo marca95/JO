@@ -1,5 +1,6 @@
 from pathlib import Path
 from decouple import config
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -97,3 +98,10 @@ TWO_FACTOR_AUTHENTICATION_METHODS = (
 OTP_EMAIL = True
 
 LOGIN_URL = 'two_factor:login'
+
+
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
