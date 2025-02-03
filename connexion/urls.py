@@ -23,5 +23,6 @@ urlpatterns = [
     ), name='password_reset_complete'),
     
     path('deconnexion/', auth_views.LogoutView.as_view(), name='logout'),
+    path('verification/', otp_verification, name='otp_verification')
 ]
 

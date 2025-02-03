@@ -3,10 +3,10 @@ from django.contrib.auth import login
 from django.contrib import messages
 from .forms import UpdateFormSignupUser, UpdateFormLoginUser, CustomSetPasswordForm
 from django.contrib.auth.views import PasswordResetDoneView, PasswordResetView, PasswordResetConfirmView, PasswordResetCompleteView
-
-# from django.http import Http404
-# from django.core.mail import send_mail
-# from jo.settings.local import EMAIL_HOST_USER
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.conf import settings
+import pyotp
 
 def connexion(request, action):
     theme = 'connexion.css'
@@ -14,26 +14,44 @@ def connexion(request, action):
     if action == 'login': 
         if request.method == 'POST':
             form = UpdateFormLoginUser(request, data=request.POST) 
-            if form.is_valid():  
+            if form.is_valid():
                 user = form.get_user()
-                login(request, user)  
-                messages.success(request, "Connexion réussie.")
-                return redirect('panier')  
-            else: 
+
+                request.session["otp_user_id"] = user.id  
+
+                otp_secret = pyotp.random_base32()
+                otp_code = pyotp.TOTP(otp_secret).now()
+
+                request.session["otp_secret"] = otp_secret  
+                request.session.set_expiry(300)  
+
+                send_mail(
+                    "Votre code OTP",
+                    f"Votre code OTP est : {otp_code}",
+                    settings.DEFAULT_FROM_EMAIL,
+                    [user.email],  
+                    fail_silently=False,
+                )
+
+                messages.info(request, "Un code OTP vous a été envoyé par e-mail.")
+                return redirect('otp_verification')  
+
+            else:
                 messages.error(request, "Nom d'utilisateur ou mot de passe incorrect")
+
         else:
             form = UpdateFormLoginUser()
-    
+
     elif action == 'signup':
-        if request.method == 'POST': 
+        if request.method == 'POST':
             form = UpdateFormSignupUser(request.POST or None)
-            if form.is_valid():  
-                form.save()  
+            if form.is_valid():
+                form.save()
                 messages.success(request, "Votre compte a été créé avec succès.")
-                return redirect('login')  
+                return redirect('login')
             else:
                 messages.error(request, "Une erreur est survenue lors de l'enregistrement")
-        else: 
+        else:
             form = UpdateFormSignupUser()
       
     context = {
@@ -44,6 +62,31 @@ def connexion(request, action):
     }
 
     return render(request, 'connexion.html', context)
+
+def otp_verification(request):
+    if request.method == "POST":
+        otp_code = request.POST.get("otp_code")
+        otp_secret = request.session.get("otp_secret")
+
+        if otp_secret:
+            totp = pyotp.TOTP(otp_secret)
+            expected_otp = totp.now()
+            print(f'OTP attendu (serveur) : {expected_otp}')
+
+            if totp.verify(otp_code, valid_window=1): 
+                user_id = request.session.get("otp_user_id")
+                user = User.objects.get(id=user_id)
+
+                login(request, user)  
+                del request.session["otp_user_id"] 
+                del request.session["otp_secret"]
+
+                messages.success(request, "Connexion réussie avec OTP.")
+                return redirect("panier")  
+
+        messages.error(request, "Code OTP invalide ou expiré")
+    
+    return render(request, "verification.html", {'theme' : 'connexion.css'})
 
 
 class CustomPasswordResetDoneView(PasswordResetDoneView) :
@@ -86,4 +129,3 @@ class CustomPasswordResetCompleteView(PasswordResetCompleteView) :
       context['theme'] = 'connexion.css'
       
       return context
-    
