@@ -59,6 +59,7 @@ header {
   border: rgba(255, 255, 255, 0.493) 1px solid;
   box-shadow: 3px 3px 5px white;
   padding: 20px;
+  border-radius: 10px;
 }
 
 .nav-links ul li{
