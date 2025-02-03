@@ -11,11 +11,11 @@ ASGI_APPLICATION = 'jo.asgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'nom_base_production',
-        'USER': 'utilisateur_production',
-        'PASSWORD': 'mot_de_passe_production',
-        'HOST': 'adresse_serveur',
-        'PORT': '3306',
+        'NAME': config('DB_NAME_PROD'),
+        'USER': config('DB_USER_PROD'),
+        'PASSWORD': config('DB_PASSWORD_PROD'),
+        'HOST': config('DB_HOST_PROD'),
+        'PORT': config('DB_PORT_PROD'),
     }
 }
 
