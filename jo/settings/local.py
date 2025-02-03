@@ -17,10 +17,9 @@ DATABASES = {
 }
 
 # UTILE POUR LES FICHIERS STATIC 
-STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    ]
+    os.path.join(BASE_DIR, 'static'),
+]
 
 
 # Si je veux envoyer des vrais mails
