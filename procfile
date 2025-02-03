@@ -1,1 +1,1 @@
-web: gunicorn jo.wsgi.application
+web: daphne jo.asgi:application --bind 0.0.0.0:$PORT

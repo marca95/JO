@@ -6,6 +6,8 @@ ALLOWED_HOSTS = ['*']
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+ASGI_APPLICATION = 'jo.asgi.application'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
