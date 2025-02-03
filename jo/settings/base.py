@@ -17,11 +17,11 @@ INSTALLED_APPS = [
     'sports',
     'ticket',
     'jo', 
-    'django_otp',
-    'django_otp.plugins.otp_email',
-    'two_factor',
-    'django_otp.plugins.otp_static',
-    'django_otp.plugins.otp_totp',
+    # 'django_otp',
+    # 'django_otp.plugins.otp_email',
+    # 'two_factor',
+    # 'django_otp.plugins.otp_static',
+    # 'django_otp.plugins.otp_totp',
 ]
 
 MIDDLEWARE = [
