@@ -23,12 +23,14 @@ html {
   justify-content: center;
   align-content: center;
   padding: 0;
+  flex-wrap: wrap;
 }
 
 .img_presentation {
   background-repeat: no-repeat;
   background-size: contain;
   width: 90%;
+  height: 500px;
 }
 
 .text_presentation p{
@@ -211,6 +213,11 @@ html {
     margin: 0 auto;
     width: 90%;
   }
+
+  .img_presentation{
+    height: auto;
+  }
+
   .text_presentation p{
     padding-bottom: 10px;
     padding-right: 0;

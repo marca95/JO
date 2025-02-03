@@ -42,7 +42,12 @@ INSTALLED_APPS = [
     'panier',
     'sports',
     'ticket',
-    'jo'
+    'jo', 
+    'django_otp',
+    'django_otp.plugins.otp_email',
+    'two_factor',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_totp',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_otp.middleware.OTPMiddleware',
 ]
 
 ROOT_URLCONF = 'jo.urls'
@@ -138,3 +144,12 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGOUT_REDIRECT_URL = '/'
+
+# Besoin pour la double authentification
+TWO_FACTOR_AUTHENTICATION_METHODS = (
+    'email',
+)
+
+OTP_EMAIL = True
+
+LOGIN_URL = 'two_factor:login'

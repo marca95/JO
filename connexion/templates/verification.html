@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Vérification de votre identité avec votre adresse mail
+{% endblock %}
+
+{% block content %}
+<section class="org">
+  <h2>Vérification</h2>
+  <p>Vous avez reçu un mail avec un mot de passe généré</p>
+  <form method="POST" class="form_user">
+    {% csrf_token %}
+    <input type="text" name="otp_code" placeholder="Entrez votre code OTP" required>
+    <button type="submit">Vérifier</button>
+    {% if error %}
+    <p style="color:red;">{{ error }}</p>
+    {% endif %}
+  </form>
+</section>
+
+{% endblock %}
