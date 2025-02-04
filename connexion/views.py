@@ -21,6 +21,9 @@ def connexion(request, action):
 
                 otp_secret = pyotp.random_base32()
                 otp_code = pyotp.TOTP(otp_secret).now()
+                
+                print(f'otp_code ==== {otp_code}')
+                print(f'otp_secret ==== {otp_secret}')
 
                 request.session["otp_secret"] = otp_secret  
                 request.session.set_expiry(300)  
@@ -67,6 +70,8 @@ def otp_verification(request):
     if request.method == "POST":
         otp_code = request.POST.get("otp_code")
         otp_secret = request.session.get("otp_secret")
+        print(f'otp_code ==== {otp_code}')
+        print(f'otp_secret ==== {otp_secret}')
 
         if otp_secret:
             totp = pyotp.TOTP(otp_secret)
