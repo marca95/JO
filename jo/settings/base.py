@@ -88,13 +88,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGOUT_REDIRECT_URL = '/'
 
 # Besoin pour la double authentification
-TWO_FACTOR_AUTHENTICATION_METHODS = (
-    'email',
-)
+# TWO_FACTOR_AUTHENTICATION_METHODS = (
+#     'email',
+# )
 
-OTP_EMAIL = True
+# OTP_EMAIL = True
 
-LOGIN_URL = 'two_factor:login'
+# LOGIN_URL = 'two_factor:login'
 
 
 
