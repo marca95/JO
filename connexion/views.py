@@ -16,7 +16,7 @@ def connexion(request, action):
             form = UpdateFormLoginUser(request, data=request.POST) 
             if form.is_valid():
                 user = form.get_user()
-
+                print("Type de request:", type(request))
                 request.session["otp_user_id"] = user.id  
 
                 otp_secret = pyotp.random_base32()
