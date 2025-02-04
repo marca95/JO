@@ -1,1 +1,1 @@
-web: python jo/wsgi.py
+web: gunicorn jo.wsgi:application
