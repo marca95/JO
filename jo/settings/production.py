@@ -7,6 +7,7 @@ ALLOWED_HOSTS = ['https://jo-2024-cb5ee4d6122b.herokuapp.com']
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',  
 ]
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
