@@ -2,7 +2,7 @@ from .base import *
 from decouple import config
 
 DEBUG = False
-ALLOWED_HOSTS = ['https://jo-2024-cb5ee4d6122b.herokuapp.com']
+ALLOWED_HOSTS = ['jo-2024-cb5ee4d6122b.herokuapp.com']
 
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware', 
