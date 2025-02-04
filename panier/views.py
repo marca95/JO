@@ -47,8 +47,8 @@ def panier(request):
         'events': events,
     }
 
-    if request.user.is_authenticated:
-        context['is_authenticated'] = True
+    # if request.user.is_authenticated:
+    #     context['is_authenticated'] = True
         
     return render(request, 'panier.html', context)
 
