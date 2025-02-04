@@ -5,6 +5,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 SECRET_KEY = config('SECRET_KEY', default='CHANGER_EN_PRODUCTION POUR AVOIR LA BONNE CLE !')
 
