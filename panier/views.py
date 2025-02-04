@@ -40,14 +40,16 @@ def panier(request):
                 "nbr_places": ticket.nbr_place,
                 "formula": ticket.formula
             }
-            events.append(event_data)
+            events.append(event_data) 
 
     context = {
         'theme': theme,
         'events': events,
-        'is_authenticated': request.user.is_authenticated,
     }
 
+    if request.user.is_authenticated:
+        context['is_authenticated'] = True
+        
     return render(request, 'panier.html', context)
 
 def generate_key():
