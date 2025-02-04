@@ -7,8 +7,8 @@ from django.core.management import execute_from_command_line
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'jo.settings.local') #Attention, il faudra la changer en production !!!!
-    # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'jo.settings.production')
+    # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'jo.settings.local') #Attention, il faudra la changer en production !!!!
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'jo.settings.production')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
@@ -21,6 +21,6 @@ def main():
 
 
 if __name__ == '__main__':
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'jo.settings.local')
-   #   os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'jo.settings.production')
+   # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'jo.settings.local')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'jo.settings.production')
     execute_from_command_line(sys.argv)
