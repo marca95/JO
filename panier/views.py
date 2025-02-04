@@ -45,6 +45,7 @@ def panier(request):
     context = {
         'theme': theme,
         'events': events,
+        'is_authenticated': request.user.is_authenticated,
     }
 
     # if request.user.is_authenticated:
