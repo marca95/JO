@@ -1,0 +1,74 @@
+.doc {
+  background-image: url("../img/olymp.921c52961b86.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.doc h2{
+  text-align: center;
+  font-size: 2.6em;
+  margin: 50px auto;
+  color: black;
+}
+
+.doc div {
+  width: 60%;
+  display: block;
+  margin: 0 auto;
+  height: 50vh;
+  border: 3px solid gold;
+  box-shadow: 1px 3px 3px gold;
+  padding: 25px;
+  overflow-y: scroll;
+  border-radius: 10px;
+  background: #fff;
+  margin-top: 80px;
+}
+
+.doc div p, .doc div h6, .doc div h5 {
+  color: rgb(0, 0, 0);
+  font-size: 1.1em;
+  display: block;
+}
+
+.redirect {
+  display: block;
+  margin: 50px auto 80px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 2em;
+  border: 1px gold solid;
+  border-radius: 40px;
+  width: 300px;
+  background-color: gold;
+  transition: 0.3s all ease-in;
+  color: rgba(0, 0, 0, 1);
+}
+
+.redirect:hover {
+  background-color: rgb(199, 169, 0);
+}
+
+@media screen and (max-width: 991px) {
+  .doc div {
+    width: 75%;
+    padding: 5px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .doc h2{
+    font-size: 2em;
+  }
+
+  .doc div {
+    width: 95%;
+    padding: 5px;
+  }
+
+  .redirect {
+    font-size: 1.2em;
+    width: 200px;
+  }
+}

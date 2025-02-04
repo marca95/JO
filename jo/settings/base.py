@@ -4,6 +4,8 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+STATIC_URL = '/static/'
+
 SECRET_KEY = config('SECRET_KEY', default='CHANGER_EN_PRODUCTION POUR AVOIR LA BONNE CLE !')
 
 INSTALLED_APPS = [
@@ -101,5 +103,5 @@ LOGIN_URL = 'two_factor:login'
 
 
 
-STATIC_URL = '/static/'
+
 

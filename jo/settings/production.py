@@ -4,7 +4,13 @@ from decouple import config
 DEBUG = False
 ALLOWED_HOSTS = ['*']
 
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  
+]
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 ASGI_APPLICATION = 'jo.asgi.application'
