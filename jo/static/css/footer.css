@@ -2,8 +2,6 @@ footer {
   height: 100%;
   max-width: 100%;
   background-color: rgb(43, 43, 43);
-  display: flex;
-  justify-content: center;
   align-content: center;  
   border-top: 2px solid gold;
 }
