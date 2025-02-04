@@ -15,7 +15,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-ASGI_APPLICATION = 'jo.asgi.application'
+# ASGI_APPLICATION = 'jo.asgi.application'
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
 
 DATABASES = {
     'default': {
