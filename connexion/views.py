@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 import pyotp
 
-def connexion(request, action):
+async def connexion(request, action):
     theme = 'connexion.css'
 
     if action == 'login': 
