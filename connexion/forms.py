@@ -92,12 +92,13 @@ class UpdateFormSignupUser(UserCreationForm):
         user.is_staff = False       
         user.is_superuser = False  
         if commit:
-            user.save()
-            
             Cart.objects.create(
                 user=user,
                 first_key=generate_key()
             )
+            
+            user.save()
+            
         return user
 
 
