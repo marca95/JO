@@ -47,7 +47,7 @@ def connexion(request, action):
 
     elif action == 'signup':
         if request.method == 'POST':
-            form = UpdateFormSignupUser(request.POST or None)
+            form = UpdateFormSignupUser(request.POST)
             if form.is_valid():
                 form.save()
                 messages.success(request, "Votre compte a été créé avec succès.")
