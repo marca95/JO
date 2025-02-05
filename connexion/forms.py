@@ -94,10 +94,14 @@ class UpdateFormSignupUser(UserCreationForm):
         if commit:
             user.save()
             
-            Cart.objects.create(
-                user=user,
-                first_key=generate_key()
-            )
+            # Cart.objects.create(
+            #     user=user,
+            #     first_key=generate_key()
+            # )
+            
+            # TEST
+            cart = Cart(user=user, first_key=generate_key())
+            cart.save()
 
         return user
 
