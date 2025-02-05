@@ -91,14 +91,14 @@ class UpdateFormSignupUser(UserCreationForm):
         user = super().save(commit=False)
         user.is_staff = False       
         user.is_superuser = False  
-        if commit:            
+        if commit:
             user.save()
             
             Cart.objects.create(
                 user=user,
                 first_key=generate_key()
             )
-            
+
         return user
 
 
