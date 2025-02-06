@@ -30,6 +30,6 @@ class Event(models.Model):
   hour = models.TimeField()
   stadium = models.ForeignKey(Stadium, on_delete=models.CASCADE, related_name='events')
   sport = models.ForeignKey(Sport, on_delete=models.CASCADE)
-  nation = models.ManyToManyField(Nation, related_name='events')
+  nation = models.ManyToManyField(Nation, related_name='events', blank=True)
   admin = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-  player = models.ManyToManyField(Player, related_name='events')
+  player = models.ManyToManyField(Player, related_name='events', blank=True)
