@@ -6,16 +6,25 @@ class Stadium(models.Model):
   name = models.CharField(max_length=50)
   address = models.CharField(max_length=100, unique=True)
   available_space = models.IntegerField(validators=[MinValueValidator(0)])
+  
+  def __str__(self):
+      return self.name
 
 class Sport(models.Model):
   name = models.CharField(max_length=50, unique=True)
   description = models.TextField()
   image = models.ImageField(unique=True)
+  
+  def __str__(self):
+      return self.name
 
 class Nation(models.Model):
   name = models.CharField(max_length=50, unique=True)
   nickname = models.CharField(max_length=50, unique=True, blank=True)
   image = models.ImageField(unique=True)
+  
+  def __str__(self):
+      return self.name
   
 class Player(models.Model):
   first_name = models.CharField(max_length=50)
@@ -24,6 +33,9 @@ class Player(models.Model):
   image = models.ImageField(default='players/default_image.jpg')
   nation = models.ForeignKey(Nation, on_delete=models.CASCADE, related_name='players')
   sports = models.ManyToManyField(Sport, related_name='players')
+  
+  def __str__(self):
+      return f"{self.first_name} {self.last_name}"
   
 class Event(models.Model):
   date = models.DateField()

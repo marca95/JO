@@ -23,7 +23,7 @@ def offre_view(request, sport_name):
         for event in events:
             formatted_date = event.date.strftime('%d/%m/%Y')
             
-            tickets = Ticket.objects.filter(event=event)
+            tickets = Ticket.objects.filter(event=event).order_by('nbr_place')
             occupied_seats = 0
 
             for ticket in tickets:
@@ -81,7 +81,7 @@ def detail_view(request, sport_name, event_id):
         event = get_object_or_404(Event, id=event_id)
         nations = event.nation.all()
         players = event.player.all()
-        tickets = Ticket.objects.filter(event=event)
+        tickets = Ticket.objects.filter(event=event).order_by('nbr_place')
         occupied_seats = 0
 
         for ticket in tickets:
