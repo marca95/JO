@@ -26,7 +26,9 @@ Si vous obtenez une erreur, passez à l'étape suivante pour l'installation.
 ### Installer Python
 
 Téléchargez Python 3.0 ou une version plus récente depuis le site officiel :
+
 https://www.python.org/downloads/
+
 Lors de l’installation, cochez impérativement l’option :
 - "Add Python to PATH"
 
