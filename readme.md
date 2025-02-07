@@ -10,15 +10,41 @@ Cette application permet aux utilisateurs d’acheter des e-billets pour assiste
 - Chaque utilisateur dispose d’un **panier** pour gérer ses achats.
 - Accès à la liste des différentes épreuves des JO.
 
-## Installation
+## Installation pour un environnement Windows
 
 L'application est développée en **Python** avec le framework **Django**.
 
-### Vérification de la version de Python
+### Vérifier si Python est installé
+
+Ouvrez un terminal ou une invite de commande
 
 > python --version
 
-Python 3.4 et supérieur inclut déjà pip (le gestionnaire de paquets). Si vous utilisez une version plus ancienne, vous devrez l’installer manuellement.
+Si une version de Python s'affiche, c'est que Python est déjà installé.
+Si vous obtenez une erreur, passez à l'étape suivante pour l'installation. 
+
+### Installer Python
+
+Téléchargez Python 3.0 ou une version plus récente depuis le site officiel :
+https://www.python.org/downloads/
+Lors de l’installation, cochez impérativement l’option :
+- "Add Python to PATH"
+
+Ensuite, cliquez sur "Install Now" et suivez les instructions.
+
+### Vérification l'installation de Python et pip
+
+Après l’installation, ouvrez un terminal et vérifiez à nouveau Python :
+
+> python --version
+
+Assurez-vous également que pip (le gestionnaire de paquets) est bien installé :
+
+> pip --version
+
+Si pip n'est pas détecté, installez-le avec :
+
+> python -m ensurepip --default-pip
 
 ### Installation de Django
 
