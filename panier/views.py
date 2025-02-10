@@ -188,39 +188,45 @@ def status(request):
 def personal_data(request):
     theme = 'personal_data.css'
     if request.method == "POST":
-        form = PersonalDataForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            first_name = form.cleaned_data.get('first_name')
-            last_name = form.cleaned_data.get('last_name')
-            email = form.cleaned_data.get('email')
+        if 'update' in request.POST:
+            form = PersonalDataForm(request.POST)
+            if form.is_valid():
+                username = form.cleaned_data.get('username')
+                first_name = form.cleaned_data.get('first_name')
+                last_name = form.cleaned_data.get('last_name')
+                email = form.cleaned_data.get('email')
 
-            user = request.user
-            
-            if email and User.objects.filter(email=email).exclude(id=user.id).exists():
-                messages.error(request, "Cet email est déjà utilisé par un autre utilisateur.")
+                user = request.user
+                
+                if email and User.objects.filter(email=email).exclude(id=user.id).exists():
+                    messages.error(request, "Cet email est déjà utilisé par un autre utilisateur.")
+                    return redirect('personal_data')  
+
+                if username and User.objects.filter(username=username).exclude(id=user.id).exists():
+                    messages.error(request, "Ce nom d'utilisateur est déjà pris.")
+                    return redirect('personal_data')
+                
+                if username:
+                    user.username = username
+                if first_name:
+                    user.first_name = first_name
+                if last_name:
+                    user.last_name = last_name
+                if email:
+                    user.email = email
+
+                user.save()
+                messages.success(request, "Vos données personnelles ont été mises à jour.")
                 return redirect('personal_data')  
 
-            if username and User.objects.filter(username=username).exclude(id=user.id).exists():
-                messages.error(request, "Ce nom d'utilisateur est déjà pris.")
-                return redirect('personal_data')
-            
-            if username:
-                user.username = username
-            if first_name:
-                user.first_name = first_name
-            if last_name:
-                user.last_name = last_name
-            if email:
-                user.email = email
-
-            user.save()
-            messages.success(request, "Vos données personnelles ont été mises à jour.")
-            return redirect('personal_data')  
-
-        else:
-            messages.error(request, "Une erreur est survenue lors de la mise à jour de vos données.")
-            
+            else:
+                messages.error(request, "Une erreur est survenue lors de la mise à jour de vos données.")
+        elif 'delete' in request.POST : 
+            user = request.user
+            user.delete()
+            messages.success(request, "Votre compte a été supprimé avec succès.")
+            return redirect('home')
+                
     else:
         form = PersonalDataForm(initial={
             'username': request.user.username,
