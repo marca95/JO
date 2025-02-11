@@ -16,14 +16,10 @@ def connexion(request, action):
             form = UpdateFormLoginUser(request, data=request.POST) 
             if form.is_valid():
                 user = form.get_user()
-                print("Type de request:", type(request))
                 request.session["otp_user_id"] = user.id  
 
                 otp_secret = pyotp.random_base32()
                 otp_code = pyotp.TOTP(otp_secret).now()
-                
-                print(f'otp_code ==== {otp_code}')
-                print(f'otp_secret ==== {otp_secret}')
 
                 request.session["otp_secret"] = otp_secret  
                 request.session.set_expiry(300)  
@@ -70,13 +66,10 @@ def otp_verification(request):
     if request.method == "POST":
         otp_code = request.POST.get("otp_code")
         otp_secret = request.session.get("otp_secret")
-        print(f'otp_code ==== {otp_code}')
-        print(f'otp_secret ==== {otp_secret}')
 
         if otp_secret:
             totp = pyotp.TOTP(otp_secret)
             expected_otp = totp.now()
-            print(f'OTP attendu (serveur) : {expected_otp}')
 
             if totp.verify(otp_code, valid_window=1): 
                 user_id = request.session.get("otp_user_id")

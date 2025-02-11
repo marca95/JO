@@ -14,8 +14,8 @@ class ConnexionViewTests(TestCase):
       'password': 'Traineau1?',
     }, follow=True)
         
-    self.assertRedirects(response, reverse('panier'))
-    self.assertTrue('_auth_user_id' in self.client.session)
+    self.assertRedirects(response, reverse('otp_verification'))
+    self.assertFalse('_auth_user_id' in self.client.session)
       
   def test_login_wrong_password(self):
     response = self.client.post(reverse('login'), {

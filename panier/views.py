@@ -221,6 +221,7 @@ def personal_data(request):
 
             else:
                 messages.error(request, "Une erreur est survenue lors de la mise à jour de vos données.")
+                
         elif 'delete' in request.POST : 
             user = request.user
             user.delete()
