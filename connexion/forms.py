@@ -26,6 +26,7 @@ class UpdateFormSignupUser(UserCreationForm):
     email = forms.EmailField(max_length=255, required=True, label="Adresse email")
     username = forms.CharField(max_length=150, required=True, label="Nom d'utilisateur")
     password1 = forms.CharField(
+        max_length=255,
         widget=forms.PasswordInput,
         label="Mot de passe",
         help_text=(
@@ -37,6 +38,7 @@ class UpdateFormSignupUser(UserCreationForm):
         )
     )
     password2 = forms.CharField(
+        max_length=255,
         widget=forms.PasswordInput,
         label="Confirmez le mot de passe",
     )
